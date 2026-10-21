@@ -1,0 +1,14 @@
+{
+  "name": "DEVON · Tributo Keane Coldplay Travis",
+  "short_name": "DEVON",
+  "description": "Setlists y repertorio del tributo a Keane, Coldplay y Travis",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#050a16",
+  "theme_color": "#e8b93b",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
