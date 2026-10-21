@@ -5,7 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>DEVON · Tributo Keane Coldplay Travis</title>
 <meta name="theme-color" content="#12063a">
-<meta name="description" content="Portal de setlists y repertorio del tributo a Keane, Coldplay y Travis.">
+<meta name="description" content="Portal de setlists, repertorio y guías del tributo a Keane, Coldplay y Travis.">
+
+<!-- Open Graph / WhatsApp -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="DEVON · Tributo Keane Coldplay Travis" />
+<meta property="og:description" content="Portal de setlists, repertorio y guías del tributo a Keane, Coldplay y Travis." />
+<meta property="og:image" content="https://saoentertainment.github.io/URANTHIA/logo-devon.jpg" /> <!-- ¡CAMBIAR POR LA URL DE TU LOGO CUANDO LO SUBAS! -->
+<meta property="og:url" content="https://saoentertainment.github.io/URANTHIA/" /> <!-- ¡CAMBIAR POR LA URL DE TU REPO! -->
+<meta property="og:site_name" content="DEVON" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="DEVON · Tributo Keane Coldplay Travis" />
+<meta name="twitter:description" content="Portal de setlists, repertorio y guías del tributo a Keane, Coldplay y Travis." />
+<meta name="twitter:image" content="https://saoentertainment.github.io/URANTHIA/logo-devon.jpg" />
+
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/svg+xml" href="icon.svg">
 <link rel="apple-touch-icon" href="icon.svg">
@@ -13,6 +28,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DEVON">
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 
@@ -502,7 +518,7 @@ body.dia .song-b{color:#6b7a8f}
 .dot.ke{background:var(--ke);box-shadow:0 0 6px var(--ke)}
 .dot.tr{background:var(--tr);box-shadow:0 0 6px var(--tr)}
 
-.acts{display:flex;gap:5px;flex:0 0 auto}
+.acts{display:flex;gap:4px;flex:0 0 auto}
 .mini{
   width:32px;height:32px;border-radius:9px;border:none;
   display:grid;place-items:center;font-size:.85rem;cursor:pointer;
@@ -512,12 +528,15 @@ body.dia .song-b{color:#6b7a8f}
 .mini.yt{background:rgba(255,45,149,.22);color:#ff2d95;box-shadow:0 0 10px rgba(255,45,149,.15);}
 .mini.live{background:rgba(0,217,255,.20);color:#00d9ff;box-shadow:0 0 10px rgba(0,217,255,.15);}
 .mini.letra{background:rgba(255,225,74,.20);color:#ffe14a;box-shadow:0 0 10px rgba(255,225,74,.15);}
+.mini.guia{background:rgba(255,138,61,.20);color:#ff8a3d;box-shadow:0 0 10px rgba(255,138,61,.15);}
 body.dia .mini.yt{background:#ffe0ec;color:#d1166b}
 body.dia .mini.live{background:#d4f5ff;color:#0a94b8}
 body.dia .mini.letra{background:#fff5cc;color:#b8860b}
+body.dia .mini.guia{background:#ffebd6;color:#d97706}
 body.show .mini.yt{background:rgba(255,45,149,.30)}
 body.show .mini.live{background:rgba(0,217,255,.28)}
 body.show .mini.letra{background:rgba(255,225,74,.28)}
+body.show .mini.guia{background:rgba(255,138,61,.28)}
 
 .empty{
   background:var(--card);
@@ -883,6 +902,7 @@ body.dia .footer strong{color:#b8860b;text-shadow:none}
   </div>
 </div>
 
+<script src="guias.js"></script>
 <script>
 /* ═══════════════════════════════════════════════════════════
    CANCIONES · 32 temas
@@ -1093,7 +1113,7 @@ function volverHome(){
 function getSL(id){ return state.setlists.find(s => s.id === id); }
 
 /* ═══════════════════════════════════════════════════════════
-   RENDER: lista de canciones
+   RENDER: lista de canciones (con botón de Guía)
    ═══════════════════════════════════════════════════════════ */
 function renderSongsList(songIds, sl){
   return songIds.map(id => {
@@ -1102,6 +1122,11 @@ function renderSongsList(songIds, sl){
     const on = !!sl.checks[id];
     const tieneLinks = state.links[id] && (state.links[id].orig || state.links[id].live);
     const iconoLink = tieneLinks ? '🔗' : '📄';
+    
+    // Verificamos si hay guía de bajo para esta canción
+    const tieneGuia = typeof GUIAS !== 'undefined' && GUIAS[id] && GUIAS[id].includes('bajo');
+    const btnGuia = tieneGuia ? `<a class="mini guia" href="guias/${id}-bajo.html" target="_blank" title="Guía de Bajo">🎸</a>` : '';
+
     return `
       <div class="song ${on ? 'listo' : ''}">
         <button class="chk ${on ? 'on' : ''}" onclick="toggleCheck('${id}')">${on ? '✓' : ''}</button>
@@ -1112,6 +1137,7 @@ function renderSongsList(songIds, sl){
         <div class="acts">
           <a class="mini yt" href="${linkOrig(id)}" target="_blank" rel="noopener" title="Original">▶</a>
           <a class="mini live" href="${linkLive(id)}" target="_blank" rel="noopener" title="En vivo">🎬</a>
+          ${btnGuia}
           <button class="mini letra" onclick="abrirLetra('${id}')" title="Letra / Links">${iconoLink}</button>
         </div>
       </div>
@@ -1384,7 +1410,8 @@ function copiarReporte(){
 
 function compartirReporteWhatsApp(){
   const txt = document.getElementById('reporte-texto').value;
-  window.open('https://wa.me/?text=' + encodeURIComponent(txt), '_blank');
+  // Usamos la API nativa whatsapp:// que maneja mejor los emojis en Android
+  window.open('whatsapp://send?text=' + encodeURIComponent(txt), '_blank');
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1428,7 +1455,7 @@ function compartirAvance(){
     `👉 Importá mi avance abriendo este link:\n${url}\n\n` +
     `(O copiá el código y pegalo en la app).\n\nCódigo:\n${code}`;
 
-  window.open('https://wa.me/?text=' + encodeURIComponent(texto), '_blank');
+  window.open('whatsapp://send?text=' + encodeURIComponent(texto), '_blank');
 }
 
 function abrirModalImportar(){
