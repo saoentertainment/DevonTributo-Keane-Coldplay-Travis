@@ -32,8 +32,6 @@
   --text:#f5f5ff;
   --sub:#b0a4d4;
   --card:rgba(16,8,56,.72);
-  --card-2:rgba(26,10,72,.72);
-  --border:rgba(255,45,149,.30);
   --border-soft:rgba(255,255,255,.10);
   --shadow:0 18px 45px rgba(0,0,0,.55);
 }
@@ -799,26 +797,35 @@ body.dia .footer strong{color:#b8860b;text-shadow:none}
   </div>
 </div>
 
-<!-- ══════ MODAL LETRA ══════ -->
+<!-- ══════ MODAL LETRA Y LINKS ══════ -->
 <div class="modal-root" id="modal-letra">
   <div class="modal-bg" data-close></div>
   <div class="modal">
     <div class="modal-head">
       <div>
-        <div class="mh-title" id="letra-title">Letra</div>
+        <div class="mh-title" id="letra-title">Letra y Links</div>
         <div class="mh-sub" id="letra-sub">—</div>
       </div>
       <button class="x" data-close>✕</button>
     </div>
     <div class="modal-body">
       <div class="field">
+        <label>Link Original (YouTube)</label>
+        <input id="link-orig" type="url" placeholder="https://youtu.be/...">
+        <div class="hint">Dejalo vacío para buscar automático.</div>
+      </div>
+      <div class="field">
+        <label>Link En Vivo (YouTube)</label>
+        <input id="link-live" type="url" placeholder="https://youtu.be/...">
+        <div class="hint">Dejalo vacío para buscar automático.</div>
+      </div>
+      <div class="field">
         <label>Letra</label>
-        <textarea id="letra-input" placeholder="Pegá acá la letra..."></textarea>
-        <div class="hint">Se guarda solo en este dispositivo.</div>
+        <textarea id="letra-input" placeholder="Pegá acá la letra..." style="min-height:120px"></textarea>
       </div>
       <div class="row">
         <button class="btn btn-sec" data-close>Cerrar</button>
-        <button class="btn btn-prim2" onclick="guardarLetra()">💾 Guardar</button>
+        <button class="btn btn-prim2" onclick="guardarLetraYLinks()">💾 Guardar todo</button>
       </div>
     </div>
   </div>
@@ -844,6 +851,33 @@ body.dia .footer strong{color:#b8860b;text-shadow:none}
       <div class="row">
         <button class="btn btn-sec" data-close>Cancelar</button>
         <button class="btn btn-prim2" onclick="procesarImportacion()">📥 Importar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ MODAL REPORTE ══════ -->
+<div class="modal-root" id="modal-reporte">
+  <div class="modal-bg" data-close></div>
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="mh-title">📤 Reporte del Setlist</div>
+        <div class="mh-sub" id="reporte-sub">—</div>
+      </div>
+      <button class="x" data-close>✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="field">
+        <label>Vista previa</label>
+        <textarea id="reporte-texto" readonly style="min-height:250px;font-size:.78rem;line-height:1.6;"></textarea>
+      </div>
+      <div class="row">
+        <button class="btn btn-sec" data-close>Cerrar</button>
+        <button class="btn btn-prim2" onclick="copiarReporte()">📋 Copiar texto</button>
+      </div>
+      <div class="row">
+        <button class="btn" style="background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;" onclick="compartirReporteWhatsApp()">📱 Enviar por WhatsApp</button>
       </div>
     </div>
   </div>
@@ -1066,6 +1100,8 @@ function renderSongsList(songIds, sl){
     const s = SONG_MAP[id];
     if (!s) return '';
     const on = !!sl.checks[id];
+    const tieneLinks = state.links[id] && (state.links[id].orig || state.links[id].live);
+    const iconoLink = tieneLinks ? '🔗' : '📄';
     return `
       <div class="song ${on ? 'listo' : ''}">
         <button class="chk ${on ? 'on' : ''}" onclick="toggleCheck('${id}')">${on ? '✓' : ''}</button>
@@ -1076,7 +1112,7 @@ function renderSongsList(songIds, sl){
         <div class="acts">
           <a class="mini yt" href="${linkOrig(id)}" target="_blank" rel="noopener" title="Original">▶</a>
           <a class="mini live" href="${linkLive(id)}" target="_blank" rel="noopener" title="En vivo">🎬</a>
-          <button class="mini letra" onclick="abrirLetra('${id}')" title="Letra">📄</button>
+          <button class="mini letra" onclick="abrirLetra('${id}')" title="Letra / Links">${iconoLink}</button>
         </div>
       </div>
     `;
@@ -1147,6 +1183,7 @@ function renderDetail(){
 
     <div class="row" style="margin-top:14px">
       <button class="btn btn-prim2" onclick="abrirPicker()">➕ Agregar canciones</button>
+      <button class="btn" style="background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;" onclick="abrirReporte()">📤 Reporte</button>
       ${sl.tipo !== 'oficial' ? `<button class="btn btn-danger" onclick="borrarSetlist()">🗑️ Borrar</button>` : ''}
     </div>
   `;
@@ -1246,7 +1283,7 @@ function confirmarPicker(){
 }
 
 /* ═══════════════════════════════════════════════════════════
-   MODAL LETRA
+   MODAL LETRA Y LINKS
    ═══════════════════════════════════════════════════════════ */
 let letraActualId = null;
 
@@ -1257,17 +1294,97 @@ function abrirLetra(songId){
   document.getElementById('letra-title').textContent = s.t;
   document.getElementById('letra-sub').textContent = s.b;
   document.getElementById('letra-input').value = state.letras[songId] || '';
+  document.getElementById('link-orig').value = (state.links[songId] && state.links[songId].orig) || '';
+  document.getElementById('link-live').value = (state.links[songId] && state.links[songId].live) || '';
   document.getElementById('modal-letra').classList.add('open');
 }
 
-function guardarLetra(){
+function guardarLetraYLinks(){
   if (!letraActualId) return;
+  
   const txt = document.getElementById('letra-input').value.trim();
   if (txt) state.letras[letraActualId] = txt;
   else delete state.letras[letraActualId];
+
+  const orig = document.getElementById('link-orig').value.trim();
+  const live = document.getElementById('link-live').value.trim();
+  
+  if (orig || live) {
+    state.links[letraActualId] = {};
+    if (orig) state.links[letraActualId].orig = orig;
+    if (live) state.links[letraActualId].live = live;
+  } else {
+    delete state.links[letraActualId];
+  }
+
   save();
   closeModal('modal-letra');
-  avisar('💾 Letra guardada');
+  if (currentSetlistId) renderDetail();
+  avisar('💾 Guardado con éxito');
+}
+
+/* ═══════════════════════════════════════════════════════════
+   REPORTE
+   ═══════════════════════════════════════════════════════════ */
+function abrirReporte(){
+  const sl = getSL(currentSetlistId);
+  if (!sl) return;
+
+  document.getElementById('reporte-sub').textContent = sl.nombre;
+
+  let texto = `🎸 *DEVON - Tributo Keane/Coldplay/Travis*\n\n`;
+  texto += `📋 *Setlist:* ${sl.nombre}\n`;
+  if (sl.fecha) texto += `📅 *Fecha:* ${sl.fecha}\n`;
+  texto += `\n`;
+
+  const total = sl.canciones.length;
+  const hechas = sl.canciones.filter(id => sl.checks[id]).length;
+  const pct = total ? Math.round((hechas/total)*100) : 0;
+
+  texto += `📊 *Avance:* ${hechas}/${total} (${pct}%)\n\n`;
+
+  const listas = sl.canciones.filter(id => sl.checks[id]);
+  const pendientes = sl.canciones.filter(id => !sl.checks[id]);
+
+  if (listas.length) {
+    texto += `✅ *LISTAS:*\n`;
+    listas.forEach(id => {
+      const s = SONG_MAP[id];
+      texto += `- ${s.t} (${s.b})\n`;
+    });
+    texto += `\n`;
+  }
+
+  if (pendientes.length) {
+    texto += `⬜ *PENDIENTES:*\n`;
+    pendientes.forEach(id => {
+      const s = SONG_MAP[id];
+      texto += `- ${s.t} (${s.b})\n`;
+    });
+    texto += `\n`;
+  }
+
+  texto += `_Generado desde el portal de DEVON_`;
+
+  document.getElementById('reporte-texto').value = texto;
+  document.getElementById('modal-reporte').classList.add('open');
+}
+
+function copiarReporte(){
+  const txt = document.getElementById('reporte-texto').value;
+  navigator.clipboard.writeText(txt).then(() => {
+    avisar('✅ Reporte copiado');
+  }).catch(() => {
+    const ta = document.getElementById('reporte-texto');
+    ta.select();
+    document.execCommand('copy');
+    avisar('✅ Reporte copiado');
+  });
+}
+
+function compartirReporteWhatsApp(){
+  const txt = document.getElementById('reporte-texto').value;
+  window.open('https://wa.me/?text=' + encodeURIComponent(txt), '_blank');
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1284,10 +1401,9 @@ function borrarSetlist(){
 }
 
 /* ═══════════════════════════════════════════════════════════
-   COMPARTIR E IMPORTAR AVANCE
+   COMPARTIR E IMPORTAR AVANCE (GLOBAL)
    ═══════════════════════════════════════════════════════════ */
 function getPayloadCompartir(){
-  // Obtenemos solo los checks activos para no mandar datos basura
   const checksGlobales = {};
   state.setlists.forEach(sl => {
     Object.keys(sl.checks).forEach(id => {
@@ -1326,7 +1442,6 @@ function procesarImportacion(){
   if (!raw) { avisar('⚠️ Pegá el link o código'); return; }
 
   let code = raw;
-  // Si pegaron el link completo, extraemos el código
   const match = raw.match(/#share=([^&\s]+)/);
   if (match) code = match[1];
 
@@ -1347,7 +1462,6 @@ function procesarImportacion(){
 
 function importarChecks(nuevosChecks){
   let importados = 0;
-  // Sumamos los checks a TODOS los setlists donde exista la canción
   state.setlists.forEach(sl => {
     sl.canciones.forEach(id => {
       if (nuevosChecks[id] && !sl.checks[id]) {
@@ -1362,13 +1476,11 @@ function importarChecks(nuevosChecks){
   refreshGlobal();
 }
 
-/* Lógica del Hash (link compartido) */
 function checkHash(){
   const hash = location.hash || '';
   const match = hash.match(/#share=([^&\s]+)/);
   if (match) {
     document.getElementById('banner-import').classList.add('show');
-    // Guardamos temporalmente el código
     window._hashCode = match[1];
   }
 }
