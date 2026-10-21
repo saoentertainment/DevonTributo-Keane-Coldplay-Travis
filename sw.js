@@ -1,4 +1,4 @@
-const CACHE = 'devon-v1';
+const CACHE = 'devon-v2';
 const ASSETS = ['./', './index.html', './manifest.json', './icon.svg'];
 
 self.addEventListener('install', e => {
