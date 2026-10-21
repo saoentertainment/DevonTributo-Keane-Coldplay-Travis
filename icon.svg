@@ -1,6 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
-  <rect width="192" height="192" rx="40" fill="#0b1220"/>
-  <circle cx="96" cy="96" r="82" fill="none" stroke="#e8b93b" stroke-width="4"/>
+  <defs>
+    <linearGradient id="rainbow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff2d95"/>
+      <stop offset="40%" stop-color="#a855f7"/>
+      <stop offset="70%" stop-color="#00d9ff"/>
+      <stop offset="100%" stop-color="#ffe14a"/>
+    </linearGradient>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#12063a"/>
+      <stop offset="100%" stop-color="#05021a"/>
+    </radialGradient>
+  </defs>
+  <rect width="192" height="192" rx="40" fill="url(#bg)"/>
+  <circle cx="96" cy="96" r="82" fill="none" stroke="url(#rainbow)" stroke-width="4"/>
   <text x="96" y="128" font-family="Georgia,serif" font-size="90" font-weight="bold"
-        fill="#e8b93b" text-anchor="middle">D</text>
+        fill="url(#rainbow)" text-anchor="middle">D</text>
 </svg>
