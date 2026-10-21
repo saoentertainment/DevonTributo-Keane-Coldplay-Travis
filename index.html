@@ -7,19 +7,19 @@
 <meta name="theme-color" content="#12063a">
 <meta name="description" content="Portal de setlists, repertorio y guías del tributo a Keane, Coldplay y Travis.">
 
-<!-- Open Graph / WhatsApp -->
+<!-- ⚠️ CAMBIÁ ESTAS 4 LÍNEAS POR TUS DATOS REALES ⚠️ -->
 <meta property="og:type" content="website" />
 <meta property="og:title" content="DEVON · Tributo Keane Coldplay Travis" />
 <meta property="og:description" content="Portal de setlists, repertorio y guías del tributo a Keane, Coldplay y Travis." />
-<meta property="og:image" content="https://saoentertainment.github.io/URANTHIA/logo-devon.jpg" /> <!-- ¡CAMBIAR POR LA URL DE TU LOGO CUANDO LO SUBAS! -->
-<meta property="og:url" content="https://saoentertainment.github.io/URANTHIA/" /> <!-- ¡CAMBIAR POR LA URL DE TU REPO! -->
+<meta property="og:image" content="https://TU-USUARIO.github.io/TU-REPO/logo-devon.jpg" />
+<meta property="og:url" content="https://TU-USUARIO.github.io/TU-REPO/" />
 <meta property="og:site_name" content="DEVON" />
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="DEVON · Tributo Keane Coldplay Travis" />
 <meta name="twitter:description" content="Portal de setlists, repertorio y guías del tributo a Keane, Coldplay y Travis." />
-<meta name="twitter:image" content="https://saoentertainment.github.io/URANTHIA/logo-devon.jpg" />
+<meta name="twitter:image" content="https://TU-USUARIO.github.io/TU-REPO/logo-devon.jpg" />
 
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/svg+xml" href="icon.svg">
@@ -30,6 +30,7 @@
 <meta name="apple-mobile-web-app-title" content="DEVON">
 
 <style>
+/* ... (El CSS es exactamente el mismo que ya tenés, no hace falta que lo cambies) ... */
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 
 :root{
@@ -1410,8 +1411,8 @@ function copiarReporte(){
 
 function compartirReporteWhatsApp(){
   const txt = document.getElementById('reporte-texto').value;
-  // Usamos la API nativa whatsapp:// que maneja mejor los emojis en Android
-  window.open('whatsapp://send?text=' + encodeURIComponent(txt), '_blank');
+  // Usamos api.whatsapp.com que es más compatible y no rompe los emojis
+  window.location.href = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(txt);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1455,7 +1456,8 @@ function compartirAvance(){
     `👉 Importá mi avance abriendo este link:\n${url}\n\n` +
     `(O copiá el código y pegalo en la app).\n\nCódigo:\n${code}`;
 
-  window.open('whatsapp://send?text=' + encodeURIComponent(texto), '_blank');
+  // Usamos api.whatsapp.com que es más compatible y no rompe los emojis
+  window.location.href = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(texto);
 }
 
 function abrirModalImportar(){
