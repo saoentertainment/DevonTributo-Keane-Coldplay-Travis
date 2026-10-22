@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instructivo DEVON · Cómo usar el portal y agregar guías</title>
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<style>
+  :root {
+    --bg: #05021a;
+    --card: #0a0420;
+    --pink: #ff2d95;
+    --purple: #a855f7;
+    --cyan: #00d9ff;
+    --yellow: #ffe14a;
+    --text: #f5f5ff;
+    --sub: #b0a4d4;
+    --border: rgba(255,255,255,.10);
+  }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: linear-gradient(160deg, #05021a 0%, #12063a 50%, #05021a 100%);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 20px 10px;
+    margin: 0;
+  }
+  .wrap { max-width: 800px; margin: 0 auto; }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(18,6,58,.92), rgba(10,4,32,.92)) padding-box,
+                linear-gradient(135deg, #ff2d95, #a855f7, #00d9ff, #ffe14a) border-box;
+    border: 2px solid transparent;
+    border-radius: 20px;
+  }
+  .header h1 { font-family: Georgia, serif; font-size: 1.8rem; color: var(--yellow); margin: 0 0 10px 0; }
+  .header p { color: var(--sub); font-size: 0.95rem; margin: 0; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+
+  h2 {
+    font-family: Georgia, serif;
+    font-size: 1.3rem;
+    color: var(--cyan);
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 8px;
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+  h3 { font-size: 1.05rem; color: var(--yellow); margin: 20px 0 10px 0; }
+
+  p { margin-bottom: 12px; }
+  strong { color: var(--pink); }
+  
+  ul, ol { padding-left: 20px; margin-bottom: 15px; }
+  li { margin-bottom: 8px; }
+
+  code {
+    background: rgba(255,255,255,0.1);
+    color: var(--yellow);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+  }
+
+  .btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--pink), var(--purple));
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: 800;
+    margin-top: 10px;
+    transition: 0.2s;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255,45,149,0.4); }
+
+  .box-info {
+    background: rgba(0, 217, 255, 0.1);
+    border-left: 4px solid var(--cyan);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 15px 0;
+  }
+  .box-warn {
+    background: rgba(255, 45, 149, 0.1);
+    border-left: 4px solid var(--pink);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 15px 0;
+  }
+
+  .footer { text-align: center; margin-top: 40px; color: var(--sub); font-size: 0.8rem; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="header">
+    <h1>🎸 Instructivo DEVON</h1>
+    <p>Todo lo que necesitás saber para manejar el portal y subir tus guías</p>
+    <a href="index.html" class="btn">← Volver al Portal</a>
+  </div>
+
+  <div class="card">
+    <h2>📁 1. Estructura del Repositorio</h2>
+    <p>Así están organizados los archivos en tu GitHub:</p>
+    <ul>
+      <li><code>index.html</code> → El portal principal (Setlists).</li>
+      <li><code>guias.js</code> → El "mapa" que le dice al portal qué canciones tienen guía.</li>
+      <li><code>guia-template.html</code> → La plantilla base. <strong>Se queda en la raíz.</strong></li>
+      <li><code>manifest.json</code> / <code>sw.js</code> → Archivos para instalar la app en el celu.</li>
+      <li><code>logo-devon-preview.jpg</code> → La imagen para WhatsApp.</li>
+      <li><strong>📁 Carpeta <code>guias/</code></strong> → Acá adentro van TODOS los archivos HTML de tus guías reales.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>🎸 2. Cómo agregar una Guía de Bajo (Paso a Paso)</h2>
+    <p>Vamos a usar como ejemplo <strong>"Fix You"</strong> de Coldplay. Su ID en el sistema es <code>coldplay-fix-you</code>.</p>
+    
+    <h3>Paso 1: Crear la carpeta <code>guias/</code></h3>
+    <p>Si no la tenés, creala en la raíz de tu repositorio de GitHub. Ahí van a vivir todas tus guías.</p>
+
+    <h3>Paso 2: Copiar y renombrar el template</h3>
+    <p>Entrá al archivo <code>guia-template.html</code>, copiá todo el código. Luego, en GitHub, andá a la carpeta <code>guias/</code> y creá un archivo nuevo con este nombre exacto:</p>
+    <code>coldplay-fix-you-bajo.html</code>
+    <p><em>Regla: Siempre es el ID de la canción + <code>-bajo.html</code>.</em></p>
+
+    <h3>Paso 3: Editar tu guía</h3>
+    <p>Pegá el código copiado dentro de ese archivo nuevo. Buscá el título y el artista y cambialos:</p>
+    <code>&lt;h1&gt;FIX YOU&lt;/h1&gt;</code><br>
+    <code>&lt;p&gt;Coldplay&lt;/p&gt;</code>
+    <p>Luego, más abajo, borrá los acordes de ejemplo y escribí tus anotaciones usando las clases que ya conocés:</p>
+    <ul>
+      <li><code>&lt;div class="linea-acordes"&gt; ... &lt;/div&gt;</code> para las filas de acordes.</li>
+      <li><code>&lt;span class="acorde"&gt;C&lt;/span&gt;</code> para acordes normales.</li>
+      <li><code>&lt;span class="acorde-paso"&gt;B&lt;/span&gt;</code> para acordes de paso (verde).</li>
+      <li><code>&lt;span class="nota-sao"&gt;Y T B C&lt;/span&gt;</code> para tus notas personales.</li>
+    </ul>
+
+    <h3>Paso 4: Avisarle al portal (¡El paso clave!)</h3>
+    <p>Andá al archivo <code>guias.js</code> en la raíz. Buscá la lista y agregá la línea:</p>
+    <code>"coldplay-fix-you": ["bajo"],</code>
+    <p><em>(No te olvides de la coma al final si hay otra canción abajo).</em></p>
+
+    <h3>Paso 5: Guardar y probar</h3>
+    <p>Guardá los cambios en GitHub, esperá 2 minutos y recargá el portal con <strong>Ctrl + F5</strong>. ¡El botón 🎸 naranja va a aparecer al lado de "Fix You"!</p>
+  </div>
+
+  <div class="card">
+    <h2>🎵 3. Cómo usar el Portal</h2>
+    
+    <h3>✅ Para marcar el avance</h3>
+    <p>En cada canción hay un círculo. Tocarlo lo pinta de dorado y suma al contador de arriba. ¡Se guarda solo en tu celular!</p>
+
+    <h3>📤 Compartir Reporte</h3>
+    <p>Dentro de cualquier Setlist, tocá el botón verde <strong>"📤 Reporte"</strong>. Te va a generar un texto con las canciones que faltan y las que ya están listas. Podés copiarlo o mandarlo directo por WhatsApp.</p>
+
+    <h3>➕ Crear un Setlist nuevo (Ensayo 1, Show, etc.)</h3>
+    <p>En la pantalla principal, tocá <strong>"➕ Crear nuevo setlist"</strong>. Ponele un nombre, elegí el tipo (Ensayo, Show u Otro) y listo. Después entrás y le agregás las canciones con el botón <strong>"➕ Agregar canciones"</strong>.</p>
+
+    <h3>🔗 Fijar Links de YouTube exactos</h3>
+    <p>Por defecto, los botones ▶ y 🎬 buscan la canción en YouTube. Si querés que abran un video exacto:</p>
+    <ol>
+      <li>Tocá el botón 📄 (o 🔗) de la canción.</li>
+      <li>Pegá el link en "Link Original" o "Link En Vivo".</li>
+      <li>Tocá "Guardar todo".</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2>⚠️ 4. Reglas de Oro y Problemas Comunes</h2>
+    
+    <div class="box-info">
+      <strong>⏱️ GitHub tarda en actualizar:</strong> Cada vez que subas un archivo, esperá 1 o 2 minutos. Si no ves los cambios, recargá con <strong>Ctrl + F5</strong> (o borrá la caché).
+    </div>
+
+    <div class="box-warn">
+      <strong>📱 WhatsApp y el caché:</strong> Si cambiaste el logo o el título de la página y WhatsApp sigue mostrando el viejo, agregale un número al final del link cuando lo compartas: <code>?v=1</code>, <code>?v=2</code>, etc. Eso fuerza a WhatsApp a buscar de nuevo.
+    </div>
+
+    <div class="box-info">
+      <strong>🤝 Importar Avance:</strong> Si un compañero te pasa su link de avance, abrilo en el celular, tocá <strong>"✅ Sí, importar"</strong> y sus checks se van a sumar a los tuyos sin borrar nada.
+    </div>
+  </div>
+
+  <div class="footer">
+    <p><strong>DEVON</strong> · Tributo Keane Coldplay Travis</p>
+    <p>Hecho para el escenario 🎤</p>
+  </div>
+
+</div>
+</body>
+</html>
