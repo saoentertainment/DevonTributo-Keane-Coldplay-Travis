@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instructivo para la Banda · DEVON</title>
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<style>
+  :root {
+    --bg-deep: #05021a;
+    --bg-mid: #12063a;
+    --pink: #ff2d95;
+    --purple: #a855f7;
+    --cyan: #00d9ff;
+    --yellow: #ffe14a;
+    --green: #39ff88;
+    --text: #f5f5ff;
+    --sub: #b0a4d4;
+    --card: rgba(16,8,56,.8);
+    --border: rgba(255,255,255,.10);
+  }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: linear-gradient(160deg, var(--bg-deep) 0%, var(--bg-mid) 50%, var(--bg-deep) 100%);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 20px 10px;
+    margin: 0;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 800px; margin: 0 auto; }
+  
+  /* HEADER */
+  .header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 24px 20px;
+    background: linear-gradient(135deg, rgba(18,6,58,.92), rgba(10,4,32,.92)) padding-box,
+                linear-gradient(135deg, #ff2d95, #a855f7, #00d9ff, #ffe14a) border-box;
+    border: 2px solid transparent;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(255,45,149,0.2);
+  }
+  .header h1 { font-family: Georgia, serif; font-size: 1.8rem; color: var(--yellow); margin: 0 0 8px 0; text-shadow: 0 0 10px rgba(255,225,74,0.3); }
+  .header p { color: var(--sub); font-size: 0.95rem; margin: 0 0 15px 0; }
+  .btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--pink), var(--purple));
+    color: white;
+    text-decoration: none;
+    padding: 10px 24px;
+    border-radius: 30px;
+    font-weight: 800;
+    transition: 0.2s;
+    box-shadow: 0 4px 15px rgba(255,45,149,0.4);
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,45,149,0.6); }
+
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    backdrop-filter: blur(10px);
+  }
+  h2 {
+    font-family: Georgia, serif;
+    font-size: 1.3rem;
+    color: var(--cyan);
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 8px;
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+  h3 { font-size: 1.05rem; color: var(--yellow); margin: 20px 0 10px 0; }
+  p { margin-bottom: 12px; }
+  ul, ol { padding-left: 20px; margin-bottom: 15px; }
+  li { margin-bottom: 10px; }
+  strong { color: var(--pink); }
+  code {
+    background: rgba(255,255,255,0.1);
+    color: var(--yellow);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+  }
+
+  /* CAJAS DE INFO */
+  .box-info {
+    background: rgba(0, 217, 255, 0.1);
+    border-left: 4px solid var(--cyan);
+    padding: 14px 18px;
+    border-radius: 0 8px 8px 0;
+    margin: 15px 0;
+    font-size: 0.9rem;
+  }
+  .box-warn {
+    background: rgba(255, 45, 149, 0.1);
+    border-left: 4px solid var(--pink);
+    padding: 14px 18px;
+    border-radius: 0 8px 8px 0;
+    margin: 15px 0;
+    font-size: 0.9rem;
+  }
+  .box-green {
+    background: rgba(57, 255, 136, 0.1);
+    border-left: 4px solid var(--green);
+    padding: 14px 18px;
+    border-radius: 0 8px 8px 0;
+    margin: 15px 0;
+    font-size: 0.9rem;
+  }
+
+  .footer { text-align: center; margin-top: 40px; color: var(--sub); font-size: 0.8rem; padding-bottom: 20px; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="header">
+    <h1>🎸 Instructivo para la Banda</h1>
+    <p>Todo lo que necesitás saber para usar el portal de DEVON</p>
+    <a href="index.html" class="btn">← Ir al Portal</a>
+  </div>
+
+  <!-- INSTALACION -->
+  <div class="card">
+    <h2>📱 1. Instalar el portal en tu celular</h2>
+    <p>Para que lo tengas a mano como una app (sin abrir el navegador cada vez):</p>
+    <ul>
+      <li><strong>Android (Chrome):</strong> Tocá los tres puntitos arriba a la derecha → <em>"Instalar aplicación"</em> o <em>"Agregar a pantalla de inicio"</em>.</li>
+      <li><strong>iPhone (Safari):</strong> Tocá el botón de compartir (el cuadradito con la flecha) → <em>"Agregar a pantalla de inicio"</em>.</li>
+    </ul>
+    <p>Listo, ya te queda el logo de DEVON en tu celular.</p>
+  </div>
+
+  <!-- USO DIARIO -->
+  <div class="card">
+    <h2>🎵 2. Cómo usar el portal (Tu día a día)</h2>
+    
+    <h3>✅ Marcar tu avance</h3>
+    <p>Cuando entrás al <strong>Setlist Oficial</strong> (o a cualquier ensayo), vas a ver un círculo al lado de cada canción. Tocá ese círculo cuando ya la tengas dominada. Se pone dorado y suma al contador de arriba. <strong>¡Se guarda solo en tu celular!</strong></p>
+
+    <h3>▶ Escuchar las canciones</h3>
+    <p>Al lado de cada canción tenés dos botones:
+      <br>▶ (Rosa) → Abre la versión original en YouTube.
+      <br>🎬 (Celeste) → Abre una versión en vivo.
+    </p>
+
+    <h3>📄 Ver la letra o los links</h3>
+    <p>Si la canción tiene un 📄 o un 🔗, tocalo para ver la letra o abrir el link exacto que Javi configuró.</p>
+
+    <h3>🎸 Ver la Guía de Bajo</h3>
+    <p>Si aparece el botón 🎸 (Naranja), tocalo para abrir la guía de bajo con las anotaciones de Javi (acordes, estructura, etc.). Si no aparece, es porque esa canción todavía no tiene guía.</p>
+  </div>
+
+  <!-- COMPARTIR -->
+  <div class="card">
+    <h2>🤝 3. Compartir tu avance con la banda</h2>
+    <p>En la pantalla principal, tenés dos botones verdes:</p>
+    <ul>
+      <li><strong>📤 Compartir avance:</strong> Te genera un link. Mandáselo a Javi o al grupo de WhatsApp. Cuando ellos lo abren, tus checks se suman a los de ellos.</li>
+      <li><strong>📥 Importar:</strong> Si Javi o un compañero te pasa su link de avance, tocalo, esperá que cargue el portal y tocá <strong>"Sí, importar"</strong>. Los checks se suman sin borrar los tuyos.</li>
+    </ul>
+    <div class="box-green">
+      <strong>💡 Tip:</strong> Usá esto para saber qué canciones les faltan practicar a cada uno antes del ensayo.
+    </div>
+  </div>
+
+  <!-- REPORTES -->
+  <div class="card">
+    <h2>📋 4. Hacer reportes para el ensayo</h2>
+    <p>Dentro de cualquier Setlist (Ensayo 1, Show, etc.), tocá el botón verde <strong>"📤 Reporte"</strong>.</p>
+    <p>Te va a generar un texto con:
+      <br>✅ Las canciones que ya están listas.
+      <br>⬜ Las que faltan.
+    </p>
+    <p>Lo podés copiar y pegar en el grupo de WhatsApp para avisarle al resto cómo viene la mano.</p>
+  </div>
+
+  <!-- ADMIN -->
+  <div class="card">
+    <h2>🔧 5. Lo que hace Javi (El Admin)</h2>
+    <p>Para que sepas por qué a veces te digo "esperá que lo subo":</p>
+    <ul>
+      <li><strong>Fija los links exactos de YouTube:</strong> Si un botón ▶ te manda a un video raro, es porque Javi todavía no lo fijó. Cuando lo haga, abrirá el video exacto.</li>
+      <li><strong>Sube las guías de bajo:</strong> Yo creo los archivos con mis anotaciones y las subo al servidor. Ahí es cuando te aparece el botón 🎸.</li>
+      <li><strong>Crea los Setlists oficiales:</strong> Los ensayos y shows los armo yo para que todos veamos lo mismo.</li>
+      <li><strong>Actualiza la app:</strong> A veces hago mejoras visuales o agrego canciones nuevas al repertorio.</li>
+    </ul>
+  </div>
+
+  <!-- REGLAS -->
+  <div class="card">
+    <h2>⚠️ 6. Reglas de Oro</h2>
+    <div class="box-warn">
+      <strong>No borres los datos del navegador:</strong> Si limpiás la caché o los datos de navegación de tu celular, vas a perder tus checks. (Avisame y te paso un código para recuperarlos).
+    </div>
+    <div class="box-info">
+      <strong>Actualizá la página:</strong> Cada vez que entres, hacé <strong>Ctrl + F5</strong> o cerrá y abrí la app de nuevo. Así te asegurás de ver la última versión que subí.
+    </div>
+  </div>
+
+  <div class="footer">
+    <p><strong>DEVON</strong> · Tributo Keane · Coldplay · Travis</p>
+    <p>Hecho para el escenario 🎤</p>
+  </div>
+
+</div>
+</body>
+</html>
