@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía DEVON · Bajo — Adventure of a Lifetime</title>
+
+  <link rel="icon" type="image/svg+xml" href="../icon.svg">
+  <link rel="apple-touch-icon" href="../icon.svg">
+  <meta name="theme-color" content="#12063a">
+
+  <style>
+    /* ══════ ESTILOS BASE DE LA PLANTILLA ══════ */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: #0d0d0d; color: #000; line-height: 1.7;
+      padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+    }
+    header { text-align: center; margin-bottom: 20px; padding: 10px; }
+    header a { display: inline-block; text-decoration: none; }
+    header img {
+      max-width: 220px; width: 100%; height: auto; margin-bottom: 10px;
+      filter: drop-shadow(0 0 15px rgba(255, 45, 149, 0.5));
+      cursor: pointer; transition: transform 0.2s ease;
+    }
+    header img:hover { transform: scale(1.05); }
+    header h1 { color: #ffe14a; font-size: 1.8rem; letter-spacing: 2px; margin-bottom: 5px; text-shadow: 0 0 10px rgba(255, 225, 74, 0.4); }
+    
+    /* LÍNEA DE BPM Y TONALIDAD SIMPLIFICADA */
+    header p { color: #00d9ff; font-size: 0.95rem; font-weight: bold; letter-spacing: 0.5px; }
+    header p strong { color: #fff; }
+
+    .btn-volver {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 12px;
+      padding: 10px 22px; background: rgba(255,255,255,.08); color: #fff;
+      border: 2px solid rgba(255,255,255,.15); border-radius: 30px;
+      text-decoration: none; font-weight: 800; font-size: 0.85rem;
+      letter-spacing: 0.5px; text-transform: uppercase; transition: all 0.2s ease;
+    }
+    .btn-volver:hover { background: #ff2d95; color: #fff; border-color: #ff2d95; transform: translateY(-2px); }
+
+    /* BARRA DE CONTROLES */
+    .controles {
+      position: sticky; top: 10px; z-index: 100;
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+      background-color: rgba(26, 26, 26, 0.95); padding: 12px 16px;
+      border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px); width: 100%; max-width: 800px; border: 1px solid rgba(255,255,255,.1);
+    }
+    .controles button {
+      background: linear-gradient(135deg, #ffe14a, #ff8a3d); color: #000;
+      border: none; padding: 10px 16px; border-radius: 8px;
+      font-weight: bold; font-size: 0.9rem; cursor: pointer; transition: transform 0.15s;
+      box-shadow: 0 2px 8px rgba(255, 225, 74, 0.3);
+    }
+    .controles button:hover { transform: translateY(-2px); }
+    .controles .velocidad { color: #fff; font-weight: bold; font-size: 0.9rem; display: flex; align-items: center; padding: 0 8px; }
+
+    /* CONTENEDOR PRINCIPAL */
+    .contenedor {
+      width: 100%; max-width: 800px; background-color: #1a1a1a;
+      border-radius: 12px; padding: 30px; box-shadow: 0 0 25px rgba(255, 225, 74, 0.1);
+      border: 1px solid rgba(255,255,255,.05);
+    }
+
+    /* SECCIONES CON COLORES EXACTOS DE URANTHIA */
+    .seccion { margin-bottom: 25px; padding: 15px 20px; border-radius: 8px; text-align: left; }
+    .seccion p { margin: 4px 0; font-size: 1.05rem; font-weight: 500; }
+    .etiqueta {
+      display: inline-block; font-size: 0.7rem; font-weight: bold;
+      text-transform: uppercase; letter-spacing: 1.5px; padding: 3px 10px;
+      border-radius: 20px; margin-bottom: 10px; background-color: rgba(0, 0, 0, 0.3); color: #000;
+    }
+
+    /* Colores oficiales extraídos de tu enlace */
+    .intro { background-color: #d3d3d3; }
+    .estrofa { background-color: #add8e6; }
+    .precoro { background-color: #b19cd9; }
+    .coro { background-color: #ff6b6b; }
+    .puente { background-color: #ffd966; }
+    .outro { background-color: #f9a8d4; }
+
+    .linea-acordes { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; margin: 6px 0; }
+    .acorde { font-weight: 800; color: #000; font-size: 1.15rem; }
+    
+    .texto-guia { font-size: 0.95rem; margin-top: 8px; color: #222; line-height: 1.5; }
+    .texto-guia strong { color: #000; }
+
+    footer { margin-top: 30px; color: #888; font-size: 0.85rem; text-align: center; padding-bottom: 20px; }
+    footer strong { color: #ffe14a; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="../index.html" title="Volver al portal">
+      <img src="../logo-devon.jpg" alt="DEVON" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';" />
+      <!-- Se eliminó el icono de guitarra. Si no carga el logo, muestra un texto de respaldo -->
+      <div style="display:none; font-size:3rem; margin-bottom:10px;">DEVON</div>
+    </a>
+    <h1>Adventure of a Lifetime</h1>
+    <!-- BPM y Tonalidad simplificados -->
+    <p><strong>BPM:</strong> ~112 · <strong>Dm</strong></p>
+    <br>
+    <!-- Botón de volver movido al final del contenido -->
+  </header>
+
+  <div class="controles">
+    <button onclick="toggleScroll()" id="btnPlay">▶ Iniciar</button>
+    <button onclick="cambiarVelocidad(-0.5)">➖➖ Más lento</button>
+    <button onclick="cambiarVelocidad(-0.05)">➖ Más lento (fino)</button>
+    <span class="velocidad" id="velDisplay">Vel: 1x</span>
+    <button onclick="cambiarVelocidad(0.05)">➕ Más rápido (fino)</button>
+    <button onclick="cambiarVelocidad(0.5)">➕➕ Más rápido</button>
+    <button onclick="resetScroll()">⟲ Reiniciar</button>
+    <button onclick="toggleFullscreen()">⛶ Pantalla completa</button>
+  </div>
+
+  <main class="contenedor" id="contenedor">
+
+    <!-- MOTIVO PRINCIPAL -->
+    <section class="seccion intro">
+      <span class="etiqueta">🎯 Motivo Principal (El Hook)</span>
+      <p><strong>La línea de bajo es el 80% del tema.</strong> Es un groove funk-disco sincopado. Guy Berryman toca octavas y se desliza (slides) entre las notas.</p>
+      <div class="texto-guia">
+        <strong>Qué escuchar:</strong> Fijate cómo la nota más grave "empuja" y la octava arriba le da el brillo. <br>
+        <strong>Qué tocar:</strong> Empezá tocando solo las raíces en los tiempos fuertes. Cuando lo tengas clavado, agregá las octavas en los contratiempos.
+      </div>
+    </section>
+
+    <!-- ESTRUCTURA Y SECCIONES -->
+    <section class="seccion estrofa">
+      <span class="etiqueta">Verso 1 y 2</span>
+      <div class="linea-acordes">
+        <span class="acorde">Dm</span>
+        <span class="acorde">C</span>
+        <span class="acorde">Bb</span>
+        <span class="acorde">A</span>
+      </div>
+      <p class="texto-guia">
+        <strong>Raíces:</strong> Dm - C - Bb - A (secuencia descendente).<br>
+        <strong>Feel:</strong> Staccato (notas cortas). Hay que dejar silencios para que respire la voz de Chris Martin.<br>
+        <strong>Qué evitar:</strong> No llenes todo con notas. El bajo es el motor rítmico, no hace falta que toques acordes completos.
+      </p>
+    </section>
+
+    <section class="seccion precoro">
+      <span class="etiqueta">Pre-coro</span>
+      <div class="linea-acordes">
+        <span class="acorde">Bb</span>
+        <span class="acorde">C</span>
+        <span class="acorde">Dm</span>
+      </div>
+      <p class="texto-guia">
+        <strong>Feel:</strong> Acá la batería empieza a abrirse. Mantené el groove pero subí un poco la intensidad. <br>
+        <strong>Trampa:</strong> No aceleres. El pre-coro es la rampa para el coro, si te apurás acá, el coro se cae.
+      </p>
+    </section>
+
+    <section class="seccion coro">
+      <span class="etiqueta">Coro</span>
+      <div class="linea-acordes">
+        <span class="acorde">Dm</span>
+        <span class="acorde">C</span>
+        <span class="acorde">Bb</span>
+        <span class="acorde">C</span>
+      </div>
+      <p class="texto-guia">
+        <strong>Feel:</strong> ¡A volar! Acá sí podés hacer las octavas y los slides con fuerza. El coro pide "levantar" el tema.<br>
+        <strong>Trampa:</strong> Cuidado con el bombo (kick drum). El bajo tiene que estar exactamente pegado al pie del baterista.
+      </p>
+    </section>
+
+    <section class="seccion puente">
+      <span class="etiqueta">Puente / Breakdown</span>
+      <div class="linea-acordes">
+        <span class="acorde">Dm</span>
+        <span class="acorde">C</span>
+      </div>
+      <p class="texto-guia">
+        <strong>Feel:</strong> Acá baja todo. El bajo sostiene notas largas (blancas o redondas).<br>
+        <strong>Qué tocar:</strong> Dejá que el sintetizador y las voces brillen. Menos es más. Un slide lento de fondo queda perfecto.
+      </p>
+    </section>
+
+    <section class="seccion outro">
+      <span class="etiqueta">Solo de Guitarra / Outro</span>
+      <p class="texto-guia">
+        <strong>Feel:</strong> Volvemos al groove del principio. Cuando entra el solo de guitarra, el bajo se mantiene firme repitiendo el motivo principal. <br>
+        <strong>Dinámica:</strong> En el final, podés agregar algún fill (adorno) en los últimos compases antes del corte seco.
+      </p>
+    </section>
+
+  </main>
+
+  <!-- BOTÓN VOLVER AL PORTAL (AHORA AL FINAL) -->
+  <div style="margin-top: 25px; text-align: center;">
+    <a class="btn-volver" href="../index.html">🏠 Volver al portal</a>
+  </div>
+
+  <footer>
+    <p><strong>DEVON</strong> · Guía de Bajo — "Adventure of a Lifetime" | Apuntes personales</p>
+    <p>Etiqueta: <strong>DEVON · GUÍA DE BAJO</strong></p>
+  </footer>
+
+  <script>
+    let scrollActivo = false;
+    let velocidad = 1;
+    let intervaloScroll = null;
+    const btnPlay = document.getElementById('btnPlay');
+    const velDisplay = document.getElementById('velDisplay');
+
+    function toggleScroll() {
+      if (scrollActivo) { detenerScroll(); } else { iniciarScroll(); }
+    }
+
+    function iniciarScroll() {
+      scrollActivo = true;
+      btnPlay.textContent = '⏸ Pausar';
+      btnPlay.style.background = 'linear-gradient(135deg, #ff6b6b, #8b0000)';
+      btnPlay.style.color = '#fff';
+      intervaloScroll = setInterval(() => {
+        window.scrollBy(0, velocidad);
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 5) {
+          detenerScroll();
+        }
+      }, 50);
+    }
+
+    function detenerScroll() {
+      scrollActivo = false;
+      clearInterval(intervaloScroll);
+      btnPlay.textContent = '▶ Iniciar';
+      btnPlay.style.background = 'linear-gradient(135deg, #ffe14a, #ff8a3d)';
+      btnPlay.style.color = '#000';
+    }
+
+    function cambiarVelocidad(delta) {
+      velocidad += delta;
+      // Límite mínimo bajado a 0.05 para que se pueda ir muy lento
+      if (velocidad < 0.05) velocidad = 0.05; 
+      if (velocidad > 10) velocidad = 10;
+      velDisplay.textContent = 'Vel: ' + (velocidad < 1 ? velocidad.toFixed(2) : velocidad) + 'x';
+      if (scrollActivo) {
+        clearInterval(intervaloScroll);
+        intervaloScroll = setInterval(() => {
+          window.scrollBy(0, velocidad);
+          if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 5) {
+            detenerScroll();
+          }
+        }, 50);
+      }
+    }
+
+    function resetScroll() {
+      detenerScroll();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          alert('No se pudo activar pantalla completa: ' + err.message);
+        });
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') { e.preventDefault(); toggleScroll(); }
+      if (e.code === 'ArrowUp') { e.preventDefault(); cambiarVelocidad(0.05); }
+      if (e.code === 'ArrowDown') { e.preventDefault(); cambiarVelocidad(-0.05); }
+      if (e.code === 'KeyR') { resetScroll(); }
+      if (e.code === 'KeyF') { toggleFullscreen(); }
+    });
+  </script>
+
+</body>
+</html>
