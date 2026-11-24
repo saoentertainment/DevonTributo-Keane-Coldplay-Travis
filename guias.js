@@ -13,6 +13,7 @@
 // EJEMPLO:
 //   "coldplay-yellow": ["bajo"],
 //   "keane-somewhere-only-we-know": ["bajo"]
+//   "coldplay-adventure-of-a-lifetime": ["bajo"]
 // ══════════════════════════════════════════════════════
 
 const GUIAS = {
