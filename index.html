@@ -1129,7 +1129,7 @@ function renderSongsList(songIds, sl){
     
     // Verificamos si hay guía de bajo para esta canción
     const tieneGuia = typeof GUIAS !== 'undefined' && GUIAS[id] && GUIAS[id].includes('bajo');
-    const btnGuia = tieneGuia ? `<a class="mini guia" href="guias/${id}-bajo.html" target="_blank" title="Guía de Bajo">🎸</a>` : '';
+const btnGuia = tieneGuia ? `<a class="mini guia" href="guias/${id}-bajo.html" target="_blank" title="Guía de Bajo" style="padding:0; overflow:hidden;"><img src="logo-devon.jpg" style="width:100%; height:100%; object-fit:cover;" alt="DEVON"></a>` : '';
 
     return `
       <div class="song ${on ? 'listo' : ''}">
