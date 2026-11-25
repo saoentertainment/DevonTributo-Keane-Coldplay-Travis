@@ -92,6 +92,14 @@
       display: inline-block; min-width: 32px; text-align: center;
     }
 
+    /* EL TRUCO PARA ALINEAR TODO: ESPACIO RESERVADO FIJO */
+    .prefix-slot {
+      display: inline-flex;
+      align-items: center;
+      width: 95px; /* Ancho fijo para que E2 y WOOHOO quepan perfecto */
+      flex-shrink: 0;
+    }
+
     /* NOTAS EN PARÉNTESIS (FONDO ROJO) */
     .acorde-paren {
       background-color: #ffcccc; color: #cc0000; font-weight: 900;
@@ -147,6 +155,7 @@
       <span class="etiqueta">🎵 INTRO 1. GTR - FX - SYNTH</span>
       <div class="linea-acordes">
         <span class="etiqueta-v">V1</span>
+        <span class="prefix-slot"></span>
         <span class="acorde">D</span>
         <span class="acorde">G</span>
         <span class="acorde">A</span>
@@ -154,6 +163,7 @@
       </div>
       <div class="linea-acordes">
         <span class="etiqueta-v">V2</span>
+        <span class="prefix-slot"></span>
         <span class="acorde">D</span>
         <span class="acorde">G</span>
         <span class="acorde">A</span>
@@ -166,7 +176,7 @@
       <span class="etiqueta">🎵 INTRO 2. TODOS</span>
       <div class="linea-acordes">
         <span class="etiqueta-v">V1</span>
-        <span class="caja-rosa">E2</span>
+        <span class="prefix-slot"><span class="caja-rosa">E2</span></span>
         <span class="acorde">D2 D AD</span>
         <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
         <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
@@ -175,6 +185,7 @@
       </div>
       <div class="linea-acordes">
         <span class="etiqueta-v">V2</span>
+        <span class="prefix-slot"></span>
         <span class="acorde">D2 D AD</span>
         <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
         <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
@@ -188,6 +199,7 @@
       <span class="etiqueta">1️⃣</span>
       <div class="linea-acordes">
         <span class="etiqueta-v">V1</span>
+        <span class="prefix-slot"></span>
         <span class="acorde">D2 D AD</span>
         <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
         <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
@@ -196,6 +208,7 @@
       </div>
       <div class="linea-acordes">
         <span class="etiqueta-v">V2</span>
+        <span class="prefix-slot"></span>
         <span class="acorde">D2 D AD</span>
         <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
         <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
@@ -204,6 +217,7 @@
       </div>
       <div class="linea-acordes">
         <span class="etiqueta-v">V3</span>
+        <span class="prefix-slot"></span>
         <span class="acorde">D2 D AD</span>
         <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
         <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
@@ -212,6 +226,7 @@
       </div>
       <div class="linea-acordes">
         <span class="etiqueta-v">V4</span>
+        <span class="prefix-slot"></span>
         <span class="acorde">D2 D AD</span>
         <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
         <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
@@ -225,6 +240,7 @@
       <span class="etiqueta">⚠️ PRECORO 1 · Now I feel my heart beating</span>
       <div class="linea-acordes">
         <span class="etiqueta-v">V1</span>
+        <span class="prefix-slot"></span>
         <span class="acorde">D2 D AD</span>
         <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
         <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
@@ -233,6 +249,7 @@
       </div>
       <div class="linea-acordes">
         <span class="etiqueta-v">V2</span>
+        <span class="prefix-slot"></span>
         <span class="acorde">D2 D AD</span>
         <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
         <span class="acorde-paren">(EG)</span> <span class="acorde">A</span>
@@ -244,7 +261,7 @@
       <span class="etiqueta">CORO 1</span>
       <div class="linea-acordes">
         <span class="etiqueta-v">V1</span>
-        <span class="caja-rosa">E2</span>
+        <span class="prefix-slot"><span class="caja-rosa">E2</span></span>
         <span class="acorde">D2 D AD</span>
         <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
         <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
@@ -254,6 +271,7 @@
       </div>
       <div class="linea-acordes">
         <span class="etiqueta-v">V2</span>
+        <span class="prefix-slot"></span>
         <span class="acorde">D2 D AD</span>
         <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
         <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
@@ -267,6 +285,7 @@
       <span class="etiqueta">2️⃣</span>
       <div class="linea-acordes">
         <span class="etiqueta-v">V1</span>
+        <span class="prefix-slot"></span>
         <span class="acorde">D2 D AD</span>
         <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
         <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
@@ -275,6 +294,7 @@
       </div>
       <div class="linea-acordes">
         <span class="etiqueta-v">V2</span>
+        <span class="prefix-slot"></span>
         <span class="acorde">D2 D AD</span>
         <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
         <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
@@ -289,6 +309,7 @@
       <span class="etiqueta">⚠️ PRECORO 2 · Now I feel my heart beating</span>
       <div class="linea-acordes">
         <span class="etiqueta-v">V1</span>
+        <span class="prefix-slot"></span>
         <span class="acorde">D2 D AD</span>
         <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
         <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
@@ -297,6 +318,7 @@
       </div>
       <div class="linea-acordes">
         <span class="etiqueta-v">V2</span>
+        <span class="prefix-slot"></span>
         <span class="acorde">D2 D AD</span>
         <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
         <span class="acorde-paren">(EG)</span> <span class="acorde">A</span>
@@ -308,7 +330,7 @@
       <span class="etiqueta">CORO 2</span>
       <div class="linea-acordes">
         <span class="etiqueta-v">V1</span>
-        <span class="caja-rosa">E2</span>
+        <span class="prefix-slot"><span class="caja-rosa">E2</span></span>
         <span class="acorde">D2 D AD</span>
         <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
         <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
@@ -318,6 +340,7 @@
       </div>
       <div class="linea-acordes">
         <span class="etiqueta-v">V2</span>
+        <span class="prefix-slot"></span>
         <span class="acorde">D2 D AD</span>
         <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
         <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
@@ -328,7 +351,7 @@
       </div>
     </section>
 
-    <!-- PUENTE (CORREGIDO) -->
+    <!-- PUENTE -->
     <section class="seccion puente">
       <span class="etiqueta">🌉 PUENTE</span>
       <div class="linea-acordes">
@@ -359,7 +382,7 @@
       
       <div class="linea-acordes">
         <span class="etiqueta-v">V1</span>
-        <span class="caja-rosa">E2</span>
+        <span class="prefix-slot"><span class="caja-rosa">E2</span></span>
         <span class="acorde">D2 D AD</span>
         <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
         <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
@@ -369,6 +392,7 @@
       
       <div class="linea-acordes">
         <span class="etiqueta-v">V2</span>
+        <span class="prefix-slot"></span>
         <span class="acorde">D2 D AD</span>
         <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
         <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
@@ -378,24 +402,28 @@
 
       <div class="linea-acordes" style="margin-top: 12px;">
         <span class="etiqueta-v">V3</span>
-        <span class="letra-roja">If we've only got this life</span><br>
-        <span style="margin-left: 45px;" class="letra-roja">This adventure, oh, then I</span>
+        <span class="prefix-slot"></span>
+        <span class="letra-roja" style="margin-left: 0;">If we've only got this life</span><br>
+        <span style="margin-left: 142px;" class="letra-roja">This adventure, oh, then I</span>
       </div>
 
       <div class="linea-acordes">
         <span class="etiqueta-v">V4</span>
-        <span class="letra-roja">And if we've only got this life</span><br>
-        <span style="margin-left: 45px;" class="letra-roja">You'll get me through, oh</span>
+        <span class="prefix-slot"></span>
+        <span class="letra-roja" style="margin-left: 0;">And if we've only got this life</span><br>
+        <span style="margin-left: 142px;" class="letra-roja">You'll get me through, oh</span>
       </div>
 
       <div class="linea-acordes">
         <span class="etiqueta-v">V5</span>
-        <span class="letra-roja">If we've only got this life</span><br>
-        <span style="margin-left: 45px;" class="letra-roja">This adventure, oh, then I</span>
+        <span class="prefix-slot"></span>
+        <span class="letra-roja" style="margin-left: 0;">If we've only got this life</span><br>
+        <span style="margin-left: 142px;" class="letra-roja">This adventure, oh, then I</span>
       </div>
 
       <div class="linea-acordes" style="margin-top: 12px;">
         <span class="etiqueta-v">V6</span>
+        <span class="prefix-slot"></span>
         <span class="acorde">D2 D AD</span>
         <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
         <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
@@ -407,7 +435,7 @@
 
       <div class="linea-acordes">
         <span class="etiqueta-v">V7</span>
-        <span class="letra-roja">WOOHOO</span>
+        <span class="prefix-slot"><span class="letra-roja" style="margin-left: 0;">WOOHOO</span></span>
         <span class="acorde">D2 D AD</span>
         <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
         <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
@@ -417,7 +445,7 @@
 
       <div class="linea-acordes">
         <span class="etiqueta-v">V8</span>
-        <span class="letra-roja">WOOHOO</span>
+        <span class="prefix-slot"><span class="letra-roja" style="margin-left: 0;">WOOHOO</span></span>
         <span class="acorde">D2 D AD</span>
         <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
         <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
@@ -427,7 +455,7 @@
 
       <div class="linea-acordes">
         <span class="etiqueta-v">V9</span>
-        <span class="letra-roja">WOOHOO</span>
+        <span class="prefix-slot"><span class="letra-roja" style="margin-left: 0;">WOOHOO</span></span>
         <span style="font-weight: 900; color: #444; margin-left: 5px;">SOLO EL SYNTH DE FONDO</span>
       </div>
 
