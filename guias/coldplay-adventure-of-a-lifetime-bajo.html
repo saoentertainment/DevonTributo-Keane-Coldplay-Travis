@@ -64,7 +64,7 @@
     }
 
     /* SECCIONES CON COLORES EXACTOS */
-    .seccion { margin-bottom: 20px; padding: 15px 20px; border-radius: 8px; text-align: left; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .seccion { margin-bottom: 20px; padding: 15px 20px; border-radius: 8px; text-align: left; }
     .etiqueta {
       display: inline-block; font-size: 0.75rem; font-weight: 900;
       text-transform: uppercase; letter-spacing: 1px; padding: 3px 10px;
@@ -82,8 +82,6 @@
     .linea-acordes { 
       display: flex; flex-wrap: nowrap; align-items: center; gap: 8px; 
       margin: 8px 0; font-family: 'Consolas', monospace; font-size: 1.1rem; font-weight: 700; color: #000;
-      width: max-content; /* Evita que se rompan las líneas */
-      min-width: 100%;
     }
     
     /* ETIQUETA V1, V2, ETC */
@@ -98,7 +96,7 @@
     .prefix-slot {
       display: inline-flex;
       align-items: center;
-      width: clamp(50px, 12vw, 95px); /* Se achica en celular automáticamente */
+      width: 95px; 
       flex-shrink: 0;
     }
 
@@ -124,20 +122,37 @@
     
     /* FLEX COLUMNS PARA ALINEAR TEXTOS DEBAJO DE ACORDES */
     .chord-col { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }
-    .lyrics-col { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.4; }
+    .lyrics-col { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.3; }
     .text-under { font-size: 0.75rem; line-height: 1; margin-top: 4px; }
     
     /* FOOTER */
     footer { margin-top: 30px; color: #888; font-size: 0.85rem; text-align: center; padding-bottom: 20px; width: 100%; max-width: 800px; border-top: 1px solid #222; padding-top: 20px;}
     footer strong { color: #ffe14a; }
 
-    /* AJUSTES PARA CELULAR */
-    @media (max-width: 600px) {
+    /* ══════ AJUSTES CLAVE PARA CELULAR ══════ */
+    @media (max-width: 650px) {
       .contenedor { padding: 15px 10px; }
-      .seccion { padding: 12px 15px; }
-      .linea-acordes { font-size: 0.95rem; gap: 6px; }
-      .etiqueta-v { font-size: 0.8rem; min-width: 26px; padding: 1px 5px; }
-      .text-under { font-size: 0.65rem; }
+      .seccion { padding: 12px 12px; }
+      
+      /* Achicamos la letra para que entre todo en la pantalla */
+      .linea-acordes { font-size: 0.8rem; gap: 5px; }
+      .etiqueta-v { font-size: 0.7rem; min-width: 24px; padding: 1px 4px; }
+      .prefix-slot { width: 45px; }
+      .acorde-paren { padding: 0 4px; font-size: 0.75rem; }
+      .text-under { font-size: 0.6rem; margin-top: 2px; }
+      .letra-roja { font-size: 0.8rem; }
+      
+      /* Ajustes para la sección Outro (Letras largas) */
+      .lyrics-col { font-size: 0.8rem; }
+    }
+
+    @media (max-width: 400px) {
+      /* Ajuste extra para celulares muy chiquitos */
+      .linea-acordes { font-size: 0.7rem; gap: 4px; }
+      .etiqueta-v { font-size: 0.65rem; min-width: 20px; }
+      .prefix-slot { width: 35px; }
+      .acorde-paren { padding: 0 3px; font-size: 0.7rem; }
+      .text-under { font-size: 0.55rem; }
     }
   </style>
 </head>
@@ -174,7 +189,7 @@
         <span class="acorde">D</span>
         <span class="acorde">G</span>
         <span class="acorde">A</span>
-        <span style="font-size:0.85rem; font-weight:bold; margin-left:10px; white-space:nowrap;">SOLO SYNTH</span>
+        <span style="font-size:0.75rem; font-weight:bold; margin-left:5px; white-space:nowrap;">SOLO SYNTH</span>
       </div>
       <div class="linea-acordes">
         <span class="etiqueta-v">V2</span>
@@ -182,7 +197,7 @@
         <span class="acorde">D</span>
         <span class="acorde">G</span>
         <span class="acorde">A</span>
-        <span style="font-size:0.85rem; font-weight:bold; margin-left:10px; white-space:nowrap;">MARCANDO TODOS</span>
+        <span style="font-size:0.75rem; font-weight:bold; margin-left:5px; white-space:nowrap;">MARCANDO TODOS</span>
       </div>
     </section>
 
@@ -282,7 +297,7 @@
         <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
         <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A A</span>
         <span class="acorde-paren">(CG)</span>
-        <span class="letra-roja" style="margin-left: 8px;">Alive again</span>
+        <span class="letra-roja" style="margin-left: 5px;">Alive again</span>
       </div>
       <div class="linea-acordes">
         <span class="etiqueta-v">V2</span>
@@ -295,7 +310,7 @@
       </div>
     </section>
 
-    <!-- SECCIÓN 2 (CORREGIDA PARA CELULAR) -->
+    <!-- SECCIÓN 2 -->
     <section class="seccion estrofa">
       <span class="etiqueta">2️⃣</span>
       <div class="linea-acordes">
@@ -305,7 +320,7 @@
         <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
         <span class="acorde-paren">(EG)</span> 
         
-        <!-- EL TEXTO AHORA ESTÁ PEGADO AL ACORDE A2 A EA -->
+        <!-- EL TEXTO PEGADO AL ACORDE -->
         <div class="chord-col">
           <span class="acorde">A2 A EA</span>
           <span class="letra-roja text-under">WE ARE OWN ME</span>
@@ -357,7 +372,7 @@
         <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
         <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A A</span>
         <span class="acorde-paren">(CG)</span>
-        <span class="letra-roja" style="margin-left: 8px;">Alive again</span>
+        <span class="letra-roja" style="margin-left: 5px;">Alive again</span>
       </div>
       <div class="linea-acordes">
         <span class="etiqueta-v">V2</span>
@@ -369,7 +384,7 @@
         <span class="acorde-paso">a</span>
         <span class="acorde">A2 A A</span>
         <span class="acorde-paren">(CG)</span>
-        <span class="letra-roja" style="margin-left: 8px;">Alive again</span>
+        <span class="letra-roja" style="margin-left: 5px;">Alive again</span>
       </div>
     </section>
 
