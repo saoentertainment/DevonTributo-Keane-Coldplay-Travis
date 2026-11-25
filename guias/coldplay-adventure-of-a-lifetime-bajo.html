@@ -77,6 +77,14 @@
     .coro { background-color: #ff6b6b; }
     .puente { background-color: #ffd966; }
     .outro { background-color: #f9a8d4; }
+    
+    /* ESTILO ESPECIAL PARA LA VUELTA PRINCIPAL DE REFERENCIA */
+    .v-principal-box { 
+      background-color: #fdf6d9; border: 2px dashed #d4af37; 
+      padding: 15px; border-radius: 8px; margin-bottom: 25px; color: #000;
+    }
+    .v-principal-box h3 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; color: #b8860b; }
+    .v-principal-box .acordes-ref { font-family: 'Consolas', monospace; font-size: 1.1rem; font-weight: 700; }
 
     /* ESTILOS DE ACORDES Y NOTAS */
     .linea-acordes { 
@@ -96,8 +104,7 @@
     .prefix-slot {
       display: inline-flex;
       align-items: center;
-      justify-content: flex-start;
-      width: 95px; 
+      width: 60px; 
       flex-shrink: 0;
     }
 
@@ -116,47 +123,40 @@
     .caja-rosa {
       background-color: #ffb6c1; border: 1.5px solid #ff2d95; padding: 1px 6px; border-radius: 4px; font-weight: 900; color: #000;
     }
+    
+    /* TEXTO V. PRINCIPAL */
+    .texto-vp {
+      font-weight: 900; color: #0d5c2e; background-color: rgba(13, 92, 46, 0.1);
+      padding: 1px 8px; border-radius: 4px; border: 1px solid #0d5c2e;
+      font-family: 'Segoe UI', sans-serif; font-size: 0.85rem; letter-spacing: 0.5px;
+    }
+
     .linea-vacia { color: #666; letter-spacing: 2px; }
     
     /* ANOTACIONES Y LETRAS */
     .letra-roja { color: #d10000; font-weight: 800; font-style: italic; white-space: nowrap; }
+    .text-under { font-size: 0.75rem; line-height: 1; margin-top: 4px; }
     
-    /* FLEX COLUMNS PARA ALINEAR TEXTOS DEBAJO DE ACORDES */
+    /* FLEX COLUMNS */
     .chord-col { display: inline-flex; flex-direction: column; align-items: flex-start; justify-content: center; }
     .lyrics-block { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.4; flex: 1; }
-    .text-under { font-size: 0.75rem; line-height: 1; margin-top: 4px; }
     
     /* FOOTER */
     footer { margin-top: 30px; color: #888; font-size: 0.85rem; text-align: center; padding-bottom: 20px; width: 100%; max-width: 800px; border-top: 1px solid #222; padding-top: 20px;}
     footer strong { color: #ffe14a; }
 
-    /* ══════ AJUSTES CLAVE PARA CELULAR ══════ */
+    /* AJUSTES PARA CELULAR */
     @media (max-width: 650px) {
       .contenedor { padding: 15px 10px; }
       .seccion { padding: 12px 12px; }
-      
-      /* Achicamos un poco para que los acordes entren mejor */
-      .linea-acordes { font-size: 0.85rem; gap: 5px; }
-      .etiqueta-v { font-size: 0.75rem; min-width: 26px; padding: 1px 4px; }
-      
-      /* Ajuste del prefijo (E2, WOOHOO) */
-      .prefix-slot { width: 65px; } 
-      
-      .acorde-paren { padding: 0 4px; font-size: 0.8rem; }
-      .text-under { font-size: 0.6rem; margin-top: 2px; }
-      
-      /* Hacemos que el WOOHOO y las letras rojas encajen perfecto */
-      .letra-roja { font-size: 0.75rem; letter-spacing: -0.5px; }
-      .lyrics-block { font-size: 0.85rem; }
-    }
-
-    @media (max-width: 400px) {
-      /* Ajuste final para celulares muy angostos */
-      .linea-acordes { font-size: 0.8rem; gap: 4px; }
-      .etiqueta-v { font-size: 0.7rem; min-width: 22px; }
-      .prefix-slot { width: 55px; }
-      .acorde-paren { padding: 0 3px; font-size: 0.75rem; }
-      .letra-roja { font-size: 0.7rem; }
+      .linea-acordes { font-size: 0.95rem; gap: 6px; }
+      .etiqueta-v { font-size: 0.75rem; min-width: 26px; padding: 1px 5px; }
+      .prefix-slot { width: 45px; }
+      .acorde-paren { padding: 0 4px; font-size: 0.85rem; }
+      .texto-vp { font-size: 0.75rem; padding: 1px 6px; }
+      .text-under { font-size: 0.65rem; }
+      .letra-roja { font-size: 0.85rem; }
+      .lyrics-block { font-size: 0.9rem; }
     }
   </style>
 </head>
@@ -183,6 +183,14 @@
   </div>
 
   <main class="contenedor" id="contenedor">
+
+    <!-- VUELTA PRINCIPAL (REFERENCIA) -->
+    <div class="v-principal-box">
+      <h3>🎸 Vuelta Principal (V.PRINCIPAL)</h3>
+      <div class="acordes-ref">
+        D2 D AD <span class="acorde-paren">(CD)</span> G2 G G <span class="acorde-paren">(EG)</span> A2 A EA <span class="acorde-paren">(EG)</span> A2 A A <span class="acorde-paren">(CG)</span>
+      </div>
+    </div>
 
     <!-- INTRO 1 -->
     <section class="seccion intro">
@@ -211,62 +219,22 @@
       <div class="linea-acordes">
         <span class="etiqueta-v">V1</span>
         <span class="prefix-slot"><span class="caja-rosa">E2</span></span>
-        <span class="acorde">D2 D AD</span>
-        <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A A</span>
-        <span class="acorde-paren">(CG)</span>
+        <span class="texto-vp">V. PRINCIPAL</span>
       </div>
       <div class="linea-acordes">
         <span class="etiqueta-v">V2</span>
         <span class="prefix-slot"></span>
-        <span class="acorde">D2 D AD</span>
-        <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A A</span>
-        <span class="acorde-paren">(CG)</span>
+        <span class="texto-vp">V. PRINCIPAL</span>
       </div>
     </section>
 
     <!-- SECCIÓN 1 -->
     <section class="seccion estrofa">
       <span class="etiqueta">1️⃣</span>
-      <div class="linea-acordes">
-        <span class="etiqueta-v">V1</span>
-        <span class="prefix-slot"></span>
-        <span class="acorde">D2 D AD</span>
-        <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A A</span>
-        <span class="acorde-paren">(CG)</span>
-      </div>
-      <div class="linea-acordes">
-        <span class="etiqueta-v">V2</span>
-        <span class="prefix-slot"></span>
-        <span class="acorde">D2 D AD</span>
-        <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A A</span>
-        <span class="acorde-paren">(CG)</span>
-      </div>
-      <div class="linea-acordes">
-        <span class="etiqueta-v">V3</span>
-        <span class="prefix-slot"></span>
-        <span class="acorde">D2 D AD</span>
-        <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A A</span>
-        <span class="acorde-paren">(CG)</span>
-      </div>
-      <div class="linea-acordes">
-        <span class="etiqueta-v">V4</span>
-        <span class="prefix-slot"></span>
-        <span class="acorde">D2 D AD</span>
-        <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A A</span>
-        <span class="acorde-paren">(CG)</span>
-      </div>
+      <div class="linea-acordes"><span class="etiqueta-v">V1</span><span class="prefix-slot"></span><span class="texto-vp">V. PRINCIPAL</span></div>
+      <div class="linea-acordes"><span class="etiqueta-v">V2</span><span class="prefix-slot"></span><span class="texto-vp">V. PRINCIPAL</span></div>
+      <div class="linea-acordes"><span class="etiqueta-v">V3</span><span class="prefix-slot"></span><span class="texto-vp">V. PRINCIPAL</span></div>
+      <div class="linea-acordes"><span class="etiqueta-v">V4</span><span class="prefix-slot"></span><span class="texto-vp">V. PRINCIPAL</span></div>
     </section>
 
     <!-- PRECORO 1 -->
@@ -275,11 +243,7 @@
       <div class="linea-acordes">
         <span class="etiqueta-v">V1</span>
         <span class="prefix-slot"></span>
-        <span class="acorde">D2 D AD</span>
-        <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A A</span>
-        <span class="acorde-paren">(CG)</span>
+        <span class="texto-vp">V. PRINCIPAL</span>
       </div>
       <div class="linea-acordes">
         <span class="etiqueta-v">V2</span>
@@ -296,21 +260,13 @@
       <div class="linea-acordes">
         <span class="etiqueta-v">V1</span>
         <span class="prefix-slot"><span class="caja-rosa">E2</span></span>
-        <span class="acorde">D2 D AD</span>
-        <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A A</span>
-        <span class="acorde-paren">(CG)</span>
-        <span class="letra-roja" style="margin-left: 5px;">Alive again</span>
+        <span class="texto-vp">V. PRINCIPAL</span>
+        <span class="letra-roja" style="margin-left: 8px;">Alive again</span>
       </div>
       <div class="linea-acordes">
         <span class="etiqueta-v">V2</span>
         <span class="prefix-slot"></span>
-        <span class="acorde">D2 D AD</span>
-        <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A A</span>
-        <span class="acorde-paren">(CG)</span>
+        <span class="texto-vp">V. PRINCIPAL</span>
       </div>
     </section>
 
@@ -320,26 +276,15 @@
       <div class="linea-acordes">
         <span class="etiqueta-v">V1</span>
         <span class="prefix-slot"></span>
-        <span class="acorde">D2 D AD</span>
-        <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
-        <span class="acorde-paren">(EG)</span> 
-        
-        <div class="chord-col">
-          <span class="acorde">A2 A EA</span>
-          <span class="letra-roja text-under">WE ARE OWN ME</span>
-        </div>
-
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A A</span>
-        <span class="acorde-paren">(CG)</span>
+        <span class="texto-vp">V. PRINCIPAL</span>
       </div>
       <div class="linea-acordes">
         <span class="etiqueta-v">V2</span>
         <span class="prefix-slot"></span>
-        <span class="acorde">D2 D AD</span>
-        <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A A</span>
-        <span class="acorde-paren">(CG)</span>
+        <div class="chord-col">
+          <span class="texto-vp">V. PRINCIPAL</span>
+          <span class="letra-roja text-under">WE ARE OWN ME</span>
+        </div>
       </div>
     </section>
 
@@ -349,11 +294,7 @@
       <div class="linea-acordes">
         <span class="etiqueta-v">V1</span>
         <span class="prefix-slot"></span>
-        <span class="acorde">D2 D AD</span>
-        <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A A</span>
-        <span class="acorde-paren">(CG)</span>
+        <span class="texto-vp">V. PRINCIPAL</span>
       </div>
       <div class="linea-acordes">
         <span class="etiqueta-v">V2</span>
@@ -370,24 +311,15 @@
       <div class="linea-acordes">
         <span class="etiqueta-v">V1</span>
         <span class="prefix-slot"><span class="caja-rosa">E2</span></span>
-        <span class="acorde">D2 D AD</span>
-        <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A A</span>
-        <span class="acorde-paren">(CG)</span>
-        <span class="letra-roja" style="margin-left: 5px;">Alive again</span>
+        <span class="texto-vp">V. PRINCIPAL</span>
+        <span class="letra-roja" style="margin-left: 8px;">Alive again</span>
       </div>
       <div class="linea-acordes">
         <span class="etiqueta-v">V2</span>
         <span class="prefix-slot"></span>
-        <span class="acorde">D2 D AD</span>
-        <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
-        <span class="acorde-paso">g</span>
-        <span class="acorde-paso">a</span>
-        <span class="acorde">A2 A A</span>
-        <span class="acorde-paren">(CG)</span>
-        <span class="letra-roja" style="margin-left: 5px;">Alive again</span>
+        <span class="texto-vp">V. PRINCIPAL</span>
+        <span class="acorde-paso">g</span> <span class="acorde-paso">a</span>
+        <span class="letra-roja" style="margin-left: 8px;">Alive again</span>
       </div>
     </section>
 
@@ -423,21 +355,13 @@
       <div class="linea-acordes">
         <span class="etiqueta-v">V1</span>
         <span class="prefix-slot"><span class="caja-rosa">E2</span></span>
-        <span class="acorde">D2 D AD</span>
-        <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A A</span>
-        <span class="acorde-paren">(CG)</span>
+        <span class="texto-vp">V. PRINCIPAL</span>
       </div>
       
       <div class="linea-acordes">
         <span class="etiqueta-v">V2</span>
         <span class="prefix-slot"></span>
-        <span class="acorde">D2 D AD</span>
-        <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A A</span>
-        <span class="acorde-paren">(CG)</span>
+        <span class="texto-vp">V. PRINCIPAL</span>
       </div>
 
       <div class="linea-acordes" style="margin-top: 12px;">
@@ -470,33 +394,20 @@
       <div class="linea-acordes" style="margin-top: 12px;">
         <span class="etiqueta-v">V6</span>
         <span class="prefix-slot"></span>
-        <span class="acorde">D2 D AD</span>
-        <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
-        <span class="acorde-paso">g</span>
-        <span class="acorde-paso">a</span>
-        <span class="acorde">A2 A A</span>
-        <span class="acorde-paren">(CG)</span>
+        <span class="texto-vp">V. PRINCIPAL</span>
+        <span class="acorde-paso">g</span> <span class="acorde-paso">a</span>
       </div>
 
       <div class="linea-acordes">
         <span class="etiqueta-v">V7</span>
         <span class="prefix-slot"><span class="letra-roja" style="margin-left: 0;">WOOHOO</span></span>
-        <span class="acorde">D2 D AD</span>
-        <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
-        <span class="acorde">A2 A A</span>
-        <span class="acorde-paren">(CG)</span>
+        <span class="texto-vp">V. PRINCIPAL</span>
       </div>
 
       <div class="linea-acordes">
         <span class="etiqueta-v">V8</span>
         <span class="prefix-slot"><span class="letra-roja" style="margin-left: 0;">WOOHOO</span></span>
-        <span class="acorde">D2 D AD</span>
-        <span class="acorde-paren">(CD)</span> <span class="acorde">G2 G G</span>
-        <span class="acorde-paren">(EG)</span> <span class="acorde">A2 A EA</span>
-        <span class="acorde">A2 A A</span>
-        <span class="acorde-paren">(CG)</span>
+        <span class="texto-vp">V. PRINCIPAL</span>
       </div>
 
       <div class="linea-acordes">
