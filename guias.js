@@ -17,7 +17,8 @@ const GUIAS = {
   "keane-somewhere-only-we-know": ["bajo"],
   
   // --- ACÁ AGREGAMOS LA NUEVA ---
-  "coldplay-adventure-of-a-lifetime": ["bajo"]
+  "coldplay-adventure-of-a-lifetime": ["bajo"],
+  "coldplay-clocks": ["bajo"]
   
   // Si agregás más, acordate de poner la coma en la línea de arriba:
   // "coldplay-viva-la-vida": ["bajo"],
