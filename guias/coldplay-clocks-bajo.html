@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía DEVON · Bajo — Clocks</title>
+
+  <link rel="icon" type="image/svg+xml" href="../icon.svg">
+  <link rel="apple-touch-icon" href="../icon.svg">
+  <meta name="theme-color" content="#12063a">
+
+  <style>
+    /* ══════ ESTILOS BASE DE LA PLANTILLA ══════ */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: #0d0d0d; color: #000; line-height: 1.7;
+      padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+    }
+    header { text-align: center; margin-bottom: 20px; padding: 10px; }
+    header a { display: inline-block; text-decoration: none; }
+    header img {
+      max-width: 220px; width: 100%; height: auto; margin-bottom: 10px;
+      filter: drop-shadow(0 0 15px rgba(255, 45, 149, 0.5));
+      cursor: pointer; transition: transform 0.2s ease;
+    }
+    header img:hover { transform: scale(1.05); }
+    header h1 { color: #ffe14a; font-size: 1.8rem; letter-spacing: 2px; margin-bottom: 5px; text-shadow: 0 0 10px rgba(255, 225, 74, 0.4); }
+    
+    header p { color: #00d9ff; font-size: 0.95rem; font-weight: bold; letter-spacing: 0.5px; }
+    header p strong { color: #fff; }
+
+    .btn-volver {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 12px;
+      padding: 10px 22px; background: rgba(255,255,255,.08); color: #fff;
+      border: 2px solid rgba(255,255,255,.15); border-radius: 30px;
+      text-decoration: none; font-weight: 800; font-size: 0.85rem;
+      letter-spacing: 0.5px; text-transform: uppercase; transition: all 0.2s ease;
+    }
+    .btn-volver:hover { background: #ff2d95; color: #fff; border-color: #ff2d95; transform: translateY(-2px); }
+
+    /* BARRA DE CONTROLES */
+    .controles {
+      position: sticky; top: 10px; z-index: 100;
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+      background-color: rgba(26, 26, 26, 0.95); padding: 12px 16px;
+      border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px); width: 100%; max-width: 800px; border: 1px solid rgba(255,255,255,.1);
+    }
+    .controles button {
+      background: linear-gradient(135deg, #ffe14a, #ff8a3d); color: #000;
+      border: none; padding: 10px 16px; border-radius: 8px;
+      font-weight: bold; font-size: 0.9rem; cursor: pointer; transition: transform 0.15s;
+      box-shadow: 0 2px 8px rgba(255, 225, 74, 0.3);
+    }
+    .controles button:hover { transform: translateY(-2px); }
+    .controles .velocidad { color: #fff; font-weight: bold; font-size: 0.9rem; display: flex; align-items: center; padding: 0 8px; }
+
+    /* CONTENEDOR PRINCIPAL */
+    .contenedor {
+      width: 100%; max-width: 800px; background-color: #1a1a1a;
+      border-radius: 12px; padding: 25px; box-shadow: 0 0 25px rgba(255, 225, 74, 0.1);
+      border: 1px solid rgba(255,255,255,.05);
+    }
+
+    /* SECCIONES CON COLORES EXACTOS */
+    .seccion { margin-bottom: 20px; padding: 15px 20px; border-radius: 8px; text-align: left; }
+    .etiqueta {
+      display: inline-block; font-size: 0.75rem; font-weight: 900;
+      text-transform: uppercase; letter-spacing: 1px; padding: 3px 10px;
+      border-radius: 20px; margin-bottom: 12px; background-color: rgba(0, 0, 0, 0.25); color: #000;
+    }
+
+    /* Colores Base */
+    .intro { background-color: #d3d3d3; }
+    .estrofa { background-color: #add8e6; }
+    .precoro { background-color: #b19cd9; }
+    .coro { background-color: #ff6b6b; }
+    .puente { background-color: #ffd966; }
+    .outro { background-color: #f9a8d4; }
+    
+    /* Colores Personalizados de Clocks */
+    .you-are { background-color: #ffebd6; } /* Naranja suave */
+    .home { background-color: #f9a8d4; }    /* Rosa suave */
+
+    /* ESTILOS DE ACORDES Y NOTAS */
+    .linea-acordes { 
+      display: flex; flex-wrap: wrap; align-items: center; gap: 8px; 
+      margin: 8px 0; font-family: 'Consolas', monospace; font-size: 1.1rem; font-weight: 700; color: #000;
+    }
+    
+    .etiqueta-v {
+      font-weight: 900; color: #4a2000; background-color: #fbdab1;
+      padding: 2px 8px; border-radius: 4px; border: 1px solid #d2b48c;
+      font-family: 'Segoe UI', sans-serif; font-size: 0.9rem;
+      display: inline-block; min-width: 32px; text-align: center; flex-shrink: 0;
+    }
+
+    .prefix-slot { display: inline-flex; align-items: center; width: 60px; flex-shrink: 0; }
+
+    .acorde-paren {
+      background-color: #ffcccc; color: #cc0000; font-weight: 900;
+      padding: 1px 6px; border-radius: 4px; border: 1px solid #ff6666;
+      letter-spacing: 0.5px; white-space: nowrap;
+    }
+
+    .acorde { font-weight: 800; white-space: nowrap; }
+    .acorde-paso {
+      font-weight: 900; color: #0d5c2e; background-color: rgba(13, 92, 46, 0.15);
+      padding: 1px 7px; border-radius: 5px; border: 1.5px solid #0d5c2e;
+    }
+    .caja-rosa {
+      background-color: #ffb6c1; border: 1.5px solid #ff2d95; padding: 1px 6px; border-radius: 4px; font-weight: 900; color: #000;
+    }
+    
+    .texto-vp {
+      font-weight: 900; color: #0d5c2e; background-color: rgba(13, 92, 46, 0.1);
+      padding: 1px 8px; border-radius: 4px; border: 1px solid #0d5c2e;
+      font-family: 'Segoe UI', sans-serif; font-size: 0.85rem; letter-spacing: 0.5px;
+    }
+
+    .linea-vacia { color: #666; letter-spacing: 2px; }
+    
+    .letra-roja { color: #d10000; font-weight: 800; font-style: italic; white-space: nowrap; margin-left: 5px;}
+    .letra-block { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.4; }
+    .text-under { font-size: 0.75rem; line-height: 1; margin-top: 4px; }
+    
+    .chord-col { display: inline-flex; flex-direction: column; align-items: flex-start; justify-content: center; }
+    
+    /* FIG BAJO ESPECIAL */
+    .fig-bajo { display: flex; flex-direction: column; gap: 4px; margin-top: 10px; background: rgba(0,0,0,0.05); padding: 10px; border-radius: 6px; border-left: 3px solid #555;}
+    .fig-linea { display: flex; gap: 15px; font-family: 'Consolas', monospace; font-weight: 700; font-size: 1.05rem; color: #000; }
+    .fig-linea span { min-width: 20px; }
+
+    /* FOOTER */
+    footer { margin-top: 30px; color: #888; font-size: 0.85rem; text-align: center; padding-bottom: 20px; width: 100%; max-width: 800px; border-top: 1px solid #222; padding-top: 20px;}
+    footer strong { color: #ffe14a; }
+
+    /* AJUSTES PARA CELULAR */
+    @media (max-width: 650px) {
+      .contenedor { padding: 15px 10px; }
+      .seccion { padding: 12px 12px; }
+      .linea-acordes { font-size: 0.95rem; gap: 6px; }
+      .etiqueta-v { font-size: 0.75rem; min-width: 26px; padding: 1px 5px; }
+      .prefix-slot { width: 45px; }
+      .acorde-paren { padding: 0 4px; font-size: 0.85rem; }
+      .texto-vp { font-size: 0.75rem; padding: 1px 6px; }
+      .letra-roja { font-size: 0.85rem; }
+      .fig-linea { font-size: 0.9rem; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="../index.html" title="Volver al portal">
+      <img src="../logo-devon.jpg" alt="DEVON" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';" />
+      <div style="display:none; font-size:3rem; margin-bottom:10px;">DEVON</div>
+    </a>
+    <h1>Clocks</h1>
+    <p><strong>BPM:</strong> ~131 · <strong>D#</strong> · <strong style="color:#39ff88">Vel. óptima: 0.15x</strong></p>
+  </header>
+
+  <div class="controles">
+    <button onclick="toggleScroll()" id="btnPlay">▶ Iniciar</button>
+    <button onclick="cambiarVelocidad(-0.5)">➖➖</button>
+    <button onclick="cambiarVelocidad(-0.05)">➖</button>
+    <span class="velocidad" id="velDisplay">Vel: 1x</span>
+    <button onclick="cambiarVelocidad(0.05)">➕</button>
+    <button onclick="cambiarVelocidad(0.5)">➕➕</button>
+    <button onclick="resetScroll()">⟲ Reiniciar</button>
+    <button onclick="toggleFullscreen()">⛶ Pantalla completa</button>
+  </div>
+
+  <main class="contenedor" id="contenedor">
+
+    <!-- INTRO 1 -->
+    <section class="seccion intro">
+      <span class="etiqueta">🎵 INTRO 1 (PIANO X2)</span>
+      <div class="linea-acordes">
+        <span style="font-weight: bold; font-style: italic;">(Piano solo)</span>
+      </div>
+    </section>
+
+    <!-- INTRO 2 TODOS -->
+    <section class="seccion intro">
+      <span class="etiqueta">🎵 INTRO 2 TODOS</span>
+      <div class="linea-acordes">
+        <span class="etiqueta-v">V1</span>
+        <span class="prefix-slot"></span>
+        <span class="acorde">D#</span> <span class="acorde">A#</span> <span class="acorde">A#</span> <span class="acorde">f</span>
+      </div>
+      <div class="linea-acordes">
+        <span class="etiqueta-v">V2</span>
+        <span class="prefix-slot"></span>
+        <span class="acorde">D#</span> <span class="acorde">A#</span> <span class="acorde">A#</span> <span class="acorde">f</span>
+      </div>
+    </section>
+
+    <!-- 1 ESTROFA -->
+    <section class="seccion estrofa">
+      <span class="etiqueta">1️⃣ ESTROFA</span>
+      <div class="linea-acordes"><span class="etiqueta-v">V1</span><span class="prefix-slot"></span><span class="acorde">D#</span> <span class="acorde">A#</span> <span class="acorde">A#</span> <span class="acorde">f</span></div>
+      <div class="linea-acordes"><span class="etiqueta-v">V2</span><span class="prefix-slot"></span><span class="acorde">D#</span> <span class="acorde">A#</span> <span class="acorde">A#</span> <span class="acorde">f</span></div>
+      <div class="linea-acordes"><span class="etiqueta-v">V3</span><span class="prefix-slot"></span><span class="acorde">D#</span> <span class="acorde">A#</span> <span class="acorde">A#</span> <span class="acorde">f</span></div>
+      <div class="linea-acordes"><span class="etiqueta-v">V4</span><span class="prefix-slot"></span><span class="acorde">D#</span> <span class="acorde">A#</span> <span class="acorde">A#</span> <span class="acorde">f</span></div>
+    </section>
+
+    <!-- YOU ARE -->
+    <section class="seccion you-are">
+      <span class="etiqueta">🎵 YOU ARE</span>
+      <div class="linea-acordes">
+        <span class="etiqueta-v">V1</span>
+        <span class="prefix-slot"></span>
+        <span class="acorde">D#</span> <span class="acorde">A#</span> <span class="acorde">A#</span> <span class="acorde">F</span>
+      </div>
+      <div class="linea-acordes">
+        <span class="etiqueta-v">V2</span>
+        <span class="prefix-slot"></span>
+        <span class="acorde">D#</span> <span class="acorde">A#</span> <span class="acorde">A#</span> <span class="acorde">F</span>
+      </div>
+    </section>
+
+    <!-- FIG BAJO X2 -->
+    <section class="seccion intro">
+      <span class="etiqueta">🎸 FIG BAJO x2</span>
+      <div class="fig-bajo">
+        <div class="fig-linea">
+          <span class="acorde">D#</span>
+          <span class="acorde-paren">(g#)</span>
+          <span class="acorde-paso">a#</span>
+          <span class="acorde-paso">a#</span>
+          <span class="acorde-paso">c</span>
+          <span class="acorde-paso">g#</span>
+          <span class="acorde-paso">g</span>
+          <span class="acorde-paso">g#</span>
+        </div>
+        <div class="fig-linea" style="color: #666;">
+          <span>1</span>
+          <span>455</span>
+          <span>565</span>
+          <span>43</span>
+          <span>4</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 ESTROFA -->
+    <section class="seccion estrofa">
+      <span class="etiqueta">2️⃣ ESTROFA</span>
+      <div class="linea-acordes"><span class="etiqueta-v">V1</span><span class="prefix-slot"></span><span class="acorde">D#</span> <span class="acorde">A#</span> <span class="acorde">A#</span> <span class="acorde">f</span></div>
+      <div class="linea-acordes"><span class="etiqueta-v">V2</span><span class="prefix-slot"></span><span class="acorde">D#</span> <span class="acorde">A#</span> <span class="acorde">A#</span> <span class="acorde">f</span></div>
+      
+      <div class="linea-acordes" style="margin-top: 10px;">
+        <span class="etiqueta-v">V3</span>
+        <span class="prefix-slot"></span>
+        <div class="letra-block">
+          <span class="letra-roja">Come out upon my seas</span>
+          <span class="letra-roja">Cursed missed opportunities</span>
+        </div>
+      </div>
+      
+      <div class="linea-acordes">
+        <span class="etiqueta-v">V4</span>
+        <span class="prefix-slot"></span>
+        <div class="letra-block">
+          <span class="letra-roja">Am I a part of the cure</span>
+          <span class="letra-roja">Or am I part of the disease? Singin'</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- YOU ARE (2) -->
+    <section class="seccion you-are">
+      <span class="etiqueta">🎵 YOU ARE</span>
+      <div class="linea-acordes"><span class="etiqueta-v">V1</span><span class="prefix-slot"></span><span class="acorde">D#</span> <span class="acorde">A#</span> <span class="acorde">A#</span> <span class="acorde">F</span></div>
+      <div class="linea-acordes"><span class="etiqueta-v">V2</span><span class="prefix-slot"></span><span class="acorde">D#</span> <span class="acorde">A#</span> <span class="acorde">A#</span> <span class="acorde">F</span></div>
+      
+      <div class="linea-acordes">
+        <span class="etiqueta-v">V3</span>
+        <span class="prefix-slot"></span>
+        <span class="acorde">D#</span> <span class="acorde">A#</span> <span class="acorde">A#</span> <span class="acorde">F</span>
+        <span class="letra-roja">CORO</span>
+      </div>
+      <div class="linea-acordes">
+        <span class="etiqueta-v">V4</span>
+        <span class="prefix-slot"></span>
+        <span class="acorde">D#</span> <span class="acorde">A#</span> <span class="acorde">A#</span> <span class="acorde">F</span>
+        <span class="letra-roja">CORO</span>
+      </div>
+    </section>
+
+    <!-- FIG BAJO CON CORO X2 -->
+    <section class="seccion intro">
+      <span class="etiqueta">🎸 FIG BAJO CON CORO x2</span>
+      <div class="fig-bajo">
+        <div class="fig-linea">
+          <span class="acorde">D#</span>
+          <span class="acorde-paren">(g#)</span>
+          <span class="acorde-paso">a#</span>
+          <span class="acorde-paso">a#</span>
+          <span class="acorde-paso">c</span>
+          <span class="acorde-paso">g#</span>
+          <span class="acorde-paso">g</span>
+          <span class="acorde-paso">g#</span>
+          <span class="letra-roja" style="margin-left: 10px;">CORO</span>
+        </div>
+        <div class="fig-linea" style="color: #666;">
+          <span>1</span>
+          <span>455</span>
+          <span>565</span>
+          <span>43</span>
+          <span>4</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PUENTE -->
+    <section class="seccion puente">
+      <span class="etiqueta">🌉 PUENTE</span>
+      <div class="linea-acordes"><span class="etiqueta-v">V1</span><span class="prefix-slot"></span><span class="acorde-paso">f#</span> <span class="acorde-paso">f#</span> <span class="acorde">C#</span> <span class="acorde-paso">g#</span></div>
+      <div class="linea-acordes"><span class="etiqueta-v">V2</span><span class="prefix-slot"></span><span class="acorde-paso">f#</span> <span class="acorde-paso">f#</span> <span class="acorde">C#</span> <span class="acorde-paso">g#</span></div>
+      <div class="linea-acordes"><span class="etiqueta-v">V3</span><span class="prefix-slot"></span><span class="acorde-paso">f#</span> <span class="acorde-paso">f#</span> <span class="acorde">C#</span> <span class="acorde-paso">g#</span></div>
+      <div class="linea-acordes"><span class="etiqueta-v">V4</span><span class="prefix-slot"></span><span class="acorde-paso">f#</span> <span class="acorde-paso">f#</span> <span class="acorde">C#</span> <span class="acorde-paso">g#</span></div>
+      
+      <!-- ACÁ ESTÁ LA CORRECCIÓN DE LA FLECHA ⤴️ -->
+      <div class="linea-acordes" style="margin-top: 10px;">
+        <span class="etiqueta-v">V5</span>
+        <span class="prefix-slot"></span>
+        <span class="acorde-paso">f#</span> <span class="acorde-paso">f#</span> <span class="acorde-paso">f#</span> <span class="acorde-paso">f#</span> 
+        <span class="caja-rosa">D#</span>
+        <span class="caja-rosa">⤴️</span>
+        <span class="caja-rosa" style="color:#cc0000;">🚫</span>
+      </div>
+    </section>
+
+    <!-- FIG BAJO X2 (Repetición) -->
+    <section class="seccion intro">
+      <span class="etiqueta">🎸 FIG BAJO x2</span>
+      <div class="fig-bajo">
+        <div class="fig-linea">
+          <span class="acorde">D#</span>
+          <span class="acorde-paren">(g#)</span>
+          <span class="acorde-paso">a#</span>
+          <span class="acorde-paso">a#</span>
+          <span class="acorde-paso">c</span>
+          <span class="acorde-paso">g#</span>
+          <span class="acorde-paso">g</span>
+          <span class="acorde-paso">g#</span>
+        </div>
+        <div class="fig-linea" style="color: #666;">
+          <span>1</span>
+          <span>455</span>
+          <span>565</span>
+          <span>43</span>
+          <span>4</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOME WHERE I WANTED TO GO -->
+    <section class="seccion home">
+      <span class="etiqueta">🏠 HOME WHERE I WANTED TO GO</span>
+      
+      <div style="font-weight: bold; margin-bottom: 10px;">🎸 FIG BAJO x2</div>
+      <div class="fig-bajo" style="background: rgba(255,255,255,0.4);">
+        <div class="fig-linea">
+          <span class="acorde">D#</span>
+          <span class="acorde-paren">(g#)</span>
+          <span class="acorde-paso">a#</span>
+          <span class="acorde-paso">a#</span>
+          <span class="acorde-paso">c</span>
+          <span class="acorde-paso">g#</span>
+          <span class="acorde-paso">g</span>
+          <span class="acorde-paso">g#</span>
+        </div>
+        <div class="fig-linea" style="color: #666;">
+          <span>1</span>
+          <span>455</span>
+          <span>565</span>
+          <span>43</span>
+          <span>4</span>
+        </div>
+      </div>
+
+      <div style="font-weight: bold; margin-top: 15px; margin-bottom: 10px;">🎸 FIG BAJO CON CORO x2</div>
+      <div class="fig-bajo" style="background: rgba(255,255,255,0.4);">
+        <div class="fig-linea">
+          <span class="acorde">D#</span>
+          <span class="acorde-paren">(g#)</span>
+          <span class="acorde-paso">a#</span>
+          <span class="acorde-paso">a#</span>
+          <span class="acorde-paso">c</span>
+          <span class="acorde-paso">g#</span>
+          <span class="acorde-paso">g</span>
+          <span class="acorde-paso">g#</span>
+          <span class="letra-roja" style="margin-left: 10px;">CORO</span>
+        </div>
+        <div class="fig-linea" style="color: #666;">
+          <span>1</span>
+          <span>455</span>
+          <span>565</span>
+          <span>43</span>
+          <span>4</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOLO MARCANDO -->
+    <section class="seccion home">
+      <span class="etiqueta" style="background-color: rgba(255,255,255,0.5);">SOLO MARCANDO</span>
+      <div class="linea-acordes" style="margin-top: 10px;">
+        <span class="acorde">D#</span>
+        <span class="acorde">A#</span>
+        <span class="acorde">A#</span>
+        <span class="acorde">F</span>
+        <span style="font-size: 1.3rem; color: #00d9ff; margin-left: 5px;">♾️</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- BOTÓN VOLVER AL PORTAL (AL FINAL) -->
+  <div style="margin-top: 25px; text-align: center; width: 100%;">
+    <a class="btn-volver" href="../index.html">🏠 Volver al portal</a>
+  </div>
+
+  <footer>
+    <p><strong>SAO - TOTAL FEST</strong></p>
+    <p>Guía de Bajo — "Clocks" | Apuntes de SAO</p>
+  </footer>
+
+  <script>
+    let scrollActivo = false;
+    let velocidad = 1;
+    let intervaloScroll = null;
+    let acumuladorPixeles = 0; 
+    
+    const btnPlay = document.getElementById('btnPlay');
+    const velDisplay = document.getElementById('velDisplay');
+
+    function toggleScroll() {
+      if (scrollActivo) { detenerScroll(); } else { iniciarScroll(); }
+    }
+
+    function iniciarScroll() {
+      scrollActivo = true;
+      btnPlay.textContent = '⏸ Pausar';
+      btnPlay.style.background = 'linear-gradient(135deg, #ff6b6b, #8b0000)';
+      btnPlay.style.color = '#fff';
+      
+      intervaloScroll = setInterval(() => {
+        acumuladorPixeles += velocidad;
+        if (acumuladorPixeles >= 1) {
+          const mover = Math.floor(acumuladorPixeles);
+          window.scrollBy(0, mover);
+          acumuladorPixeles -= mover;
+        }
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 5) {
+          detenerScroll();
+        }
+      }, 20);
+    }
+
+    function detenerScroll() {
+      scrollActivo = false;
+      clearInterval(intervaloScroll);
+      btnPlay.textContent = '▶ Iniciar';
+      btnPlay.style.background = 'linear-gradient(135deg, #ffe14a, #ff8a3d)';
+      btnPlay.style.color = '#000';
+    }
+
+    function cambiarVelocidad(delta) {
+      velocidad += delta;
+      if (velocidad < 0.01) velocidad = 0.01; 
+      if (velocidad > 10) velocidad = 10;
+      let textoVel = velocidad < 1 ? velocidad.toFixed(2) : velocidad;
+      velDisplay.textContent = 'Vel: ' + textoVel + 'x';
+      
+      if (scrollActivo) {
+        clearInterval(intervaloScroll);
+        iniciarScroll(); 
+        btnPlay.textContent = '⏸ Pausar'; 
+      }
+    }
+
+    function resetScroll() {
+      detenerScroll();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          alert('No se pudo activar pantalla completa: ' + err.message);
+        });
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') { e.preventDefault(); toggleScroll(); }
+      if (e.code === 'ArrowUp') { e.preventDefault(); cambiarVelocidad(0.05); }
+      if (e.code === 'ArrowDown') { e.preventDefault(); cambiarVelocidad(-0.05); }
+      if (e.code === 'KeyR') { resetScroll(); }
+      if (e.code === 'KeyF') { toggleFullscreen(); }
+    });
+  </script>
+
+</body>
+</html>
